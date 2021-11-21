@@ -1,0 +1,46 @@
+﻿@model PS_TUP.TelefonosEmpresas
+
+@{
+    ViewBag.Title = "Borrar";
+    Layout = null;
+
+}
+<head>
+    <link rel="stylesheet" href="~/Content/VentanasModal.css" />
+</head>
+
+<h3>¿Está seguro/a que desea borrar el teléfono?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <label class="fw-bold">DESCRIPCIÓN</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            <label class="fw-bold">NÚMERO</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-primary mt-3 ms-0" />
+        </div>
+    }
+
+    @*<p class="text-center">
+        @Html.ActionLink("Volver", "Index", "TelefonosEmpresas")
+    </p>*@
+</div>

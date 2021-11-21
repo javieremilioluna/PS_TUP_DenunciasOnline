@@ -1,0 +1,56 @@
+﻿@model PS_TUP.Models.Usuario
+
+@{
+    ViewBag.Title = "Cambiar Contraseña";
+}
+
+<div class="row">
+    <br /> <br />
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UserName)
+
+    <head>
+        <link rel="stylesheet" href="~/Content/Registro.css" />
+    </head>
+
+    <body class="bg-light">
+        <div class="container ">
+            <div class="wrapper">
+                <div id="formContentContraseña">
+                    <br />
+                    <div class="container col-6">
+                        <img class="img-fluid p-lg-5 p-md-3" src="~/Images/recovery.png" />
+                    </div>
+                    <h3 class="h3 mb-3 mt-2">Cambiar Contraseña</h3>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+
+                    <form>
+
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "", @id = "Password", @placeholder = "Nueva Contraseña", @name = "Password", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                        <br />
+                        <div class=" pb-0 wrapper">
+                            <input type="submit" class="" value="CONFIRMAR">
+                        </div>
+                    
+                    </form>
+                    <a href="@Url.Action("VerDatos", "Cuenta", new {@userName= User.Identity.Name})" class="btn pt-0 btn-light">Cancelar</a>
+                    <br /><br />
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+
+    <br /> <br /> <br />
+
+ 
+}
+

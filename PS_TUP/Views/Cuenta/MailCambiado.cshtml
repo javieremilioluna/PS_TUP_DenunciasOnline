@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Contraseña Cambiada";
+}
+
+
+<body>
+    <main>
+        <br /> <br /><br />
+        <section class="border p-4 h4 shadow">
+            <div class="alert alert-success text-center" role="alert" data-mdb-color="success">
+                <i class="fas fa-check-circle me-3"></i>¡Email modificado con éxito!<br />
+                <i></i>Por favor inicie sesión nuevamente:
+                <br />
+            </div><br />
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center  ">
+                @Html.ActionLink("Iniciar Sesión", "Login", new { area = "" }, new { @type = "button", @class = "btn btn-success btn-lg px-4 gap-3 shadow-lg" })
+            </div>
+        </section>
+        <br /> <br /><br /> <br /><br /> <br /><br /><br /> <br /><br /><br />
+    </main>
+</body>

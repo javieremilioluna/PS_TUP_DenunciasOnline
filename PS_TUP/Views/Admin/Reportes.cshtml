@@ -1,0 +1,164 @@
+﻿@model PS_TUP.Models.Reportes.CantidadEmprVerificadas
+
+@{
+    ViewBag.Title = "Reportes";
+}
+<br /><br />
+<h2 class="text-center">REPORTES</h2>
+
+<style>
+
+    progress[value] {
+        /* Elimino la apariencia por defecto */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        /* Quito el borde que aparece en Firefox */
+        border: none;
+        /* Añado mis propios estilos */
+        width: 270px;
+        height: 90px;
+        overflow: hidden;
+        /*  Estos estilos solo se aplicaran al fondo de la barra en mozilla */
+        /*border: 1px inset #666;*/
+        /*background-color: #15318d;*/
+    }
+
+    progress::-webkit-progress-value {
+        background: rgba(4, 37, 141, 0.75);
+    }
+
+    progress::-webkit-progress-bar {
+        background-color: #e5e5e5;
+    }
+
+    progress[id="noverificadas"]::-webkit-progress-value {
+        /*background-color: var(--progress-step-0);
+        border-radius: 0.25em;*/
+        background: rgba(211, 0, 0, 0.72);
+    }
+
+    .counter {
+        text-align: center;
+        font-size: 100px;
+        color: #005a6f;
+    }
+
+
+
+</style>
+
+<br />
+<hr />
+<div class="">
+    <h2>Porcentaje de Empresas Verificadas</h2>
+    <progress class="" id="verificadas" max="100" @*value="40"*@></progress>
+    <span class="counter ms-3 "></span>
+</div>
+<hr />
+<div class="">
+    <h2>Porcentaje de Empresas No Verificadas</h2>
+    <progress class="" id="noverificadas" max="100" @*value="60"*@></progress>
+    <span class="counter ms-3"></span>
+</div>
+
+<hr />
+<div class="">
+    <h2>Total de Empresas Registradas</h2>
+    <div class="" id="cantEmpresas" max="" @*value="60"*@></div>
+    <span class="counter ms-3"></span>
+</div>
+
+<hr />
+<div class="">
+    <h2>Total de Usuarios Registrados</h2>
+    <div class="" id="cantUsuarios" max="" @*value="60"*@></div>
+    <span class="counter ms-3"></span>
+</div>
+<br /><br />
+
+<div class="text-center">
+    <a href="@Url.Action("VerDatos","Cuenta")" class="btn btn-link text-decoration-none"> < Volver</a>
+</div>
+<br /><br /><br /><br />
+
+             
+
+<script type="text/javascript">
+
+    window.onload = function () {
+
+        animateprogress("#verificadas", @Model.porcentaje);
+        animateprogress("#noverificadas", @ViewBag.noVerif);
+        animatedNumber("#cantEmpresas", @ViewBag.cantEmpresas);
+        animatedNumber("#cantUsuarios", @ViewBag.cantUsuarios);
+
+    }
+
+  
+
+    function animateprogress(id , val) {
+
+
+        var getRequestAnimationFrame = function () {  /* <------- Declaro getRequestAnimationFrame intentando obtener la máxima compatibilidad con todos los navegadores */
+            return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(enroute, 1 / 60 * 1000);
+                };
+
+        };
+
+        var fpAnimationFrame = getRequestAnimationFrame();   /* <--- Declaro una instancia de getRequestAnimationFrame para llamar a la función animación */
+        var i = 0;
+        var animacion = function () {
+
+            if (i <= val) {
+                document.querySelector(id).setAttribute("value", i);      /* <----  Incremento el valor de la barra de progreso */
+                document.querySelector(id + "+ span").innerHTML =  i + "%";     /* <---- Incremento el porcentaje y lo muestro en la etiqueta span */
+                i++;
+                fpAnimationFrame(animacion);          /* <------------------ Mientras que el contador no llega al porcentaje fijado la función vuelve a llamarse con fpAnimationFrame     */
+            }
+
+        }
+
+        fpAnimationFrame(animacion);   /*  <---- Llamo la función animación por primera vez usando fpAnimationFrame para que se ejecute a 60fps  */
+
+    }
+
+    function animatedNumber(id, val) {
+
+        var getRequestAnimationFrame = function () {  /* <------- Declaro getRequestAnimationFrame intentando obtener la máxima compatibilidad con todos los navegadores */
+            return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(enroute, 1 / 60 * 1000);
+                };
+
+        };
+
+        var fpAnimationFrame = getRequestAnimationFrame();   /* <--- Declaro una instancia de getRequestAnimationFrame para llamar a la función animación */
+        var i = 0;
+        var animacion = function () {
+
+            if (i <= val) {
+                document.querySelector(id).setAttribute("value", i);      /* <----  Incremento el valor de la barra de progreso */
+                document.querySelector(id + "+ span").innerHTML = i ;     /* <---- Incremento el porcentaje y lo muestro en la etiqueta span */
+                i++;
+                fpAnimationFrame(animacion);          /* <------------------ Mientras que el contador no llega al porcentaje fijado la función vuelve a llamarse con fpAnimationFrame     */
+            }
+
+        }
+
+        fpAnimationFrame(animacion);   /*  <---- Llamo la función animación por primera vez usando fpAnimationFrame para que se ejecute a 60fps  */
+
+    }
+
+
+</script>

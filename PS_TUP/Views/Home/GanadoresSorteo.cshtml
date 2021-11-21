@@ -1,0 +1,60 @@
+﻿@model PS_TUP.SorteosEmpresas
+
+@{
+    ViewBag.Title = "Ganadores";
+    PS_TUP.Models.TipoEmpresa.Empresas empresa = (PS_TUP.Models.TipoEmpresa.Empresas)ViewBag.empresa;
+}
+
+@{
+
+    var items = empresa;
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/Sorteos.css" />
+</head>
+<br /> <br />
+
+@if (Model.Ganadores == null)
+{
+    <p class="text-center">&nbsp La empresa no ha informado ganadores.</p>
+    <div class="text-center">
+        <a href="@Url.Action("SorteosEmpresa", "Home", new {UserName= items.UserName, idEmpresa= items.idEmpresa})" class="btn btn-light p-4 underlineHover "> < Regresar </a>
+    </div>
+    <br /> <br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br />
+
+}
+else if (Model.Ganadores != null)
+{
+
+    <body class="bg-light">
+        <div class="container ">
+            <div class="wrapper">
+                <div id="formContent">
+                    <br />
+                    <h3 class="h3 mb-3">Ganadores del Sorteo</h3>
+                    <hr />
+                    <label class="col-sm-6 fw-bold">TÍTULO</label>
+                    <input type="text" name="country" value=" @Html.DisplayFor(model => model.Titulo)" readonly>
+
+
+                    <label class="col-sm-6 fw-bold">GANADORES</label>
+                    <textarea class="dropDown" rows="15" readonly>@Model.Ganadores.ToString()</textarea>
+
+                    <label class="col-sm-6 fw-bold">VIGENTE</label>
+                    <input type="text" name="country" value=" @Html.DisplayFor(model => model.Activo)" readonly>
+                    <br /><br />
+
+                    <div class="text-center">
+                        <a href="@Url.Action("SorteosEmpresa", "Home", new {UserName= items.UserName, idEmpresa= items.idEmpresa})" class="btn btn-light p-4 underlineHover "> < Regresar </a>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+}
+
+<br /> <br /><br /><br /><br /><br />

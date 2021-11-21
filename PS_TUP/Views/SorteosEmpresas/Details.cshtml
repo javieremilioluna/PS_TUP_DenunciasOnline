@@ -1,0 +1,67 @@
+﻿@model PS_TUP.SorteosEmpresas
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/Sorteos.css" />
+</head>
+
+<br /> <br />
+<body class="bg-light">
+    <div class="container ">
+        <div class="wrapper">
+            <div id="formContent">
+                <br />
+                <h3 class="h3 mb-3">Detalles del Sorteo</h3>
+                <hr />
+
+                <label class="col-sm-6 fw-bold">TÍTULO</label>
+                <input type="text" name="country" value=" @Html.DisplayFor(model => model.Titulo)" readonly>
+
+
+                <label class="col-sm-6 fw-bold">DESCRIPCIÓN</label>
+                @*<input type="text" name="country" value="@Html.DisplayFor(model => model.Descripcion)" readonly>*@
+
+                @Html.TextAreaFor(model => model.Descripcion, 7, 40, new { @class = "dropDown", style = "max-width:100% !important;", @readonly = true })
+
+                <label class="col-sm-6 fw-bold">FECHA DE INICIO</label>
+                <input type="text" name="country" value="@Model.FechaInicio.ToString("dd/MM/yyyy")" readonly>
+
+                <label class="col-sm-6 fw-bold">FECHA DE FIN</label>
+                <input type="text" name="country" value="@Model.FechaFin.ToString("dd/MM/yyyy")" readonly>
+
+                <label class="col-sm-6 fw-bold">GANADORES</label>
+                <textarea class="dropDown" rows="15" readonly>
+                @if(Model.Ganadores == null)
+
+                {
+                   
+                }
+
+                else if (Model.Ganadores != null)
+                {
+                      @Model.Ganadores.ToString()
+                }
+                 </textarea>
+
+                <label class="col-sm-6 fw-bold">VIGENTE</label>
+                <input type="text" name="country" value=" @Html.DisplayFor(model => model.Activo)" readonly>
+                <br /><br />
+
+                <div class="pb-5 pt-0">
+                    <a href="@Url.Action("Index")" class="btn btn-primary">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br /> <br /><br /><br /><br /><br />
+</body>
+
+
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdSorteo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

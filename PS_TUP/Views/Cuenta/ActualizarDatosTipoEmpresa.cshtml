@@ -1,0 +1,188 @@
+﻿
+@using PS_TUP.Models.TipoEmpresa
+@model RegistroTipoEmpresa
+
+@{
+    ViewBag.Title = "Actualizar Datos";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+}
+
+<div class="row">
+    <br /> <br />
+</div>
+
+@using (Html.BeginForm("ActualizarDatosTipoEmpresa", "Cuenta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UserName)
+
+    <head>
+        <link rel="stylesheet" href="~/Content/Registro.css" />
+    </head>
+
+    <body class="bg-light">
+        <div class="container ">
+            <div class="wrapper">
+                <div id="formContent">
+                    <br />
+
+                    <h3 class="h3 mb-3">Actualizar Datos</h3>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+
+                    <form>
+
+
+                        <label class="col-sm-6 fw-bold">CUIT</label>
+                        @Html.EditorFor(model => model.CUIT, new { htmlAttributes = new { @class = "", @id = "CUIT", @placeholder = "CUIT", @name = "CUIT", @maxlength = "25" } })
+                        @Html.ValidationMessageFor(model => model.CUIT, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Razón Social</label>
+                        @Html.EditorFor(model => model.razonSocial, new { htmlAttributes = new { @class = "", @id = "razonSocial", @placeholder = "Razón Social", @name = "razonSocial", @maxlength = "45" } })
+                        @Html.ValidationMessageFor(model => model.razonSocial, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Nombre Comercial</label>
+                        @Html.EditorFor(model => model.nombreComercial, new { htmlAttributes = new { @class = "", @id = "Comercial", @placeholder = "Nombre Comercial", @name = "Comercial", @maxlength = "45" } })
+                        @Html.ValidationMessageFor(model => model.nombreComercial, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Provincia</label>
+                        @Html.DropDownList("idProvincia", items, "Seleccione Provincia", htmlAttributes: new { @class = "dropDown" })
+                        @Html.ValidationMessageFor(model => model.idProvincia, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Ciudad</label>
+                        @Html.EditorFor(model => model.ciudad, new { htmlAttributes = new { @class = "", @id = "Ciudad", @placeholder = "Ciudad", @name = "Ciudad", @maxlength = "45" } })
+                        @Html.ValidationMessageFor(model => model.ciudad, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Calle</label>
+                        @Html.EditorFor(model => model.calle, new { htmlAttributes = new { @class = "", @id = "Calle", @placeholder = "Calle", @name = "Calle", @maxlength = "45" } })
+                        @Html.ValidationMessageFor(model => model.calle, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Altura</label>
+                        @Html.EditorFor(model => model.altura, new { htmlAttributes = new { @class = "", @id = "Altura", @placeholder = "Altura", @name = "Altura", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.altura, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Piso</label>
+                        @Html.EditorFor(model => model.piso, new { htmlAttributes = new { @class = "", @id = "Piso", @placeholder = "Piso", @name = "Piso", @maxlength = "10" } })
+                        @Html.ValidationMessageFor(model => model.piso, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Página Web</label>
+                        @Html.EditorFor(model => model.paginaWeb, new { htmlAttributes = new { @class = "", @id = "pagina", @placeholder = "Página Web", @name = "pagina", @maxlength = "90" } })
+                        @Html.ValidationMessageFor(model => model.paginaWeb, "", new { @class = "text-danger" })
+
+
+                        <br />
+                        <div class=" pb-0 wrapper">
+                            <input type="submit" class="" value="CONFIRMAR">
+                        </div>
+
+                    </form>
+                    <a href="@Url.Action("VerDatos", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-light">Cancelar</a>
+                    <br /><br />
+                </div>
+            </div>
+        </div>
+
+   
+
+        <br /> <br /><br /><br /><br /><br />
+
+    </body>
+
+
+    ///////////////////////////////////////////////////////////////////////////////////
+
+    @*@Html.HiddenFor(model => model.UserName)
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">CUIT</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.CUIT, htmlAttributes: new { @class = "form-control", @id = "txtDni" })
+                        @Html.ValidationMessageFor(model => model.CUIT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">razonSocial</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.razonSocial, htmlAttributes: new { @class = "form-control", @id = "txtApellido" })
+                        @Html.ValidationMessageFor(model => model.razonSocial, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">nombrecomercial</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.nombreComercial, htmlAttributes: new { @class = "form-control", @id = "txtApellido" })
+                        @Html.ValidationMessageFor(model => model.nombreComercial, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">Provincia</label>
+                    <div class="col-sm-6">
+
+                        @Html.DropDownList("idProvincia", items, "Seleccione Provincia", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.idProvincia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">ciudad</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.ciudad, htmlAttributes: new { @class = "form-control", @id = "txtEdad" })
+                        @Html.ValidationMessageFor(model => model.ciudad, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">calle</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.calle, htmlAttributes: new { @class = "form-control", @id = "txtEdad" })
+                        @Html.ValidationMessageFor(model => model.calle, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">altura</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.altura, htmlAttributes: new { @class = "form-control", @id = "txtEdad" })
+                        @Html.ValidationMessageFor(model => model.altura, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">piso</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.piso, htmlAttributes: new { @class = "form-control", @id = "txtEdad", @value = "SP" })
+                        @Html.ValidationMessageFor(model => model.piso, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">paginaWeb</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.paginaWeb, htmlAttributes: new { @class = "form-control", @id = "txtEdad", @value = "SP" })
+                        @Html.ValidationMessageFor(model => model.paginaWeb, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group text-right">
+                    <div class="col-xs-12">
+                        <button class="btn btn-success" type="submit">
+                            Actualizar Datos
+                        </button>
+                    </div>
+                </div>
+                <br />
+                <a href="@Url.Action("VerDatos", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-success">Cancelar</a>
+            </div>
+        </div>
+
+    </div>*@
+}

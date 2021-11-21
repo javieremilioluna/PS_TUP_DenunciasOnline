@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PS_TUP.Models.TipoEmpresa.Empresas>
+
+@{
+    ViewBag.Title = "Empresas";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/Empresas.css" />
+</head>
+<br /><br />
+
+<div class="container-fluid col-6">
+    <div class="row align-items-center ">
+        <div class="">
+            @using (Html.BeginForm("ResultadosBusqueda", "Home", FormMethod.Post))
+            {
+                <form class="text-center" id="buscar" name="buscar" role="search">
+                    <div class="form-group ">
+                        @Html.TextBox("nombreComercial", null, new { @class = "", @id = "EMPRESA", @onkeypress = "soloLetras(event)", @placeholder = "EMPRESA", @name = "EMPRESA", @maxlength = "45"
+                        , required = "required"})
+                    </div>
+
+                    <div class="wrapper">
+                        <input type="submit" class="" value="Buscar" />
+                    </div>
+
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+@if (Model.LongCount() >= 1)
+{
+    <p class="text-center">  Resultados:</p>
+    <p class="text-center">
+        <a class="text-center" href="@Url.Action("Index", "Home")"> < Regresar </a>
+    </p><br />
+}
+else if (Model.LongCount() == 0)
+{
+    <p class="text-center">&nbsp Lo sentimos, no se han encontrado resultados para tu búsqueda.</p>
+    <p class="text-center">
+        <a class="text-center" href="@Url.Action("Index", "Home")"> < Regresar </a>
+    </p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+}
+
+
+
+
+@foreach (var item in Model)
+{
+    <a href="@Url.Action("DetalleEmpresa", "Home", new {@idEmpresa= item.idEmpresa})" target="_blank">
+        <div class="container-fluid">
+            <div class="wrapper">
+                <div id="formContent">
+                    <div class="row d-flex align-items-center">
+                        <div class=" col-md-6  text-uppercase">
+                            <br />
+                            <h4 class="fw-bold gris pt-lg-0 pt-sm-3">  @Html.DisplayFor(modelItem => item.nombreComercial, new { @class = "" })</h4>
+                            <p class="fw-bold gris "> CUIT: @Html.DisplayFor(modelItem => item.CUIT, new { @class = "" })</p>
+                            <img class="img-fluid " src="~/Images/check.jpg" style="max-height:50px;" />
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <img class="img-fluid p-4" src="@Url.Action("getImage", "Home", new { UserName = item.UserName })" style="max-height:200px; border-radius: 35px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+    <br />
+}
+
+
+
+<br /><br /><br /><br /><br /><br />

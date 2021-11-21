@@ -1,0 +1,67 @@
+﻿@model IPagedList<PS_TUP.Models.TipoEmpresa.Empresas>
+
+@{
+    ViewBag.Title = "Empresas";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<head>
+    <link rel="stylesheet" href="~/Content/Empresas.css" />
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
+</head>
+<br /><br />
+<div class="container-fluid col-6">
+    <div class="row align-items-center ">
+        <div class="">
+            @using (Html.BeginForm("ResultadosBusqueda", "Home", FormMethod.Post))
+            {
+                <form class="text-center" id="buscar" name="buscar" role="search">
+                    <div class="form-group">
+                        @Html.TextBox("nombreComercial", null, new { @class = "", @id = "EMPRESA", @onkeypress = "soloLetras(event)", @placeholder = "EMPRESA", @name = "EMPRESA", @maxlength = "45"
+                       , required = "required" })
+                    </div>
+
+                    <div class="wrapper">
+                        <input type="submit" class="" value="Buscar" />
+                    </div>
+
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <a href="@Url.Action("DetalleEmpresa", "Home", new {@idEmpresa= item.idEmpresa})" target="_blank">
+        <div class="container-fluid">
+            <div class="wrapper">
+                <div id="formContent">
+                    <div class="row d-flex align-items-center">
+                        <div class=" col-md-6  text-uppercase">
+                            <br />
+                            <h4 class="fw-bold gris pt-lg-0 pt-sm-3">  @Html.DisplayFor(modelItem => item.nombreComercial, new { @class = "" })</h4>
+                            <p class="fw-bold gris "> CUIT: @Html.DisplayFor(modelItem => item.CUIT, new { @class = "" })</p>
+                            <img class="img-fluid " src="~/Images/check.jpg" style="max-height:50px;" />
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <img class="img-fluid p-4" src="@Url.Action("getImage", "Home", new { UserName = item.UserName })" style="max-height:200px; border-radius: 35px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+    <br />
+}
+
+    <div class="wrapper">
+        @Html.PagedListPager(Model, i => Url.Action("Empresas", "Home", new { i, search = Request.QueryString["search"] }))
+    </div>
+
+
+<br /><br /><br />

@@ -1,0 +1,47 @@
+﻿@model PS_TUP.SorteosEmpresas
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<br /><br />
+<h3>¿Está seguro/a que desea borrar el sorteo?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            <label class="col-sm-6 fw-bold">TÍTULO</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            <label class="col-sm-6 fw-bold">DESCRIPCIÓN</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-primary mt-3 ms-0" />
+            <a href="@Url.Action("Index")" class="btn btn-light mb-4">Cancelar</a>
+            @*<a href="@Url.Action("Index")" class="btn btn-light">Cancelar</a>*@
+
+
+
+        </div>
+    }
+</div>
+<br /> <br /> <br /><br /> <br /> <br /> <br /> <br />

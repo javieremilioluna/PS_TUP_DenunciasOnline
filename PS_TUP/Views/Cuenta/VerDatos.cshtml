@@ -1,0 +1,346 @@
+﻿@{
+
+    ViewBag.Title = "Escritorio";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/Tarjetas.css" />
+</head>
+
+@if (User.Identity.IsAuthenticated)
+
+{
+
+    if (User.IsInRole("Empresa"))
+    {
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary d-block p-3 mt-2 m-0 fw-bold float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            MI CUENTA
+        </button>
+        <br /><br />
+        <h2 class="text-center mt-3 mb-0">TU ESCRITORIO</h2>
+
+        <p class="text-center">IMPORTANTE! Mantené tus datos actualizados en "MI CUENTA". </p>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Opciones</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <a href="@Url.Action("CambiarContraseña", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Cambiar Contraseña</a>
+                        <a href="@Url.Action("ActualizarMail", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Cambiar Email</a>
+                        <a href="@Url.Action("ActualizarDatosTipoEmpresa", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Actualizar Datos Empresa</a>
+                        <a href="@Url.Action("CambiarLogo", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Ver o Modificar Logo</a>
+                        <a href="@Url.Action("VerificarEmpresa", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">VERIFICAR EMPRESA</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <ul class="cards">
+            <li>
+                <a href="@Url.Action("Index", "TelefonosEmpresas", new {@userName= User.Identity.Name})" class="card">
+
+                    <img src="~/Images/telefonos.jpg" class="card__image" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            @*<svg class="card__arc" xmlns="http://www.w3.org/2000/svg"></svg>*@
+                            @*<img class="card__thumb" src="https://i.imgur.com/7D7I6dI.png" alt="" />*@
+                            <div class="card__header-text">
+                                <h3 class="card__title fw-bold">Ver y Editar Teléfonos </h3>
+                            </div>
+                        </div>
+                        <p class="card__description">Desde aquí podrás acceder al listado de tus teléfonos de contacto que son visibles para el resto de usuarios.</p>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("Index", "MailsEmpresas", new {@userName= User.Identity.Name})" class="card">
+                    <img src="~/Images/mails.jpg" class="card__image" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <div class="card__header-text">
+                                <h3 class="card__title fw-bold">Ver y Editar E-mails</h3>
+                            </div>
+                        </div>
+                        <p class="card__description">Desde aquí podrás acceder al listado de tus e-mails de contacto que son visibles para el resto de usuarios.</p>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("Index", "RedesSocEmpresas", new {@userName= User.Identity.Name})" class="card">
+                    <img src="~/Images/redes.jpg" class="card__image" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <div class="card__header-text">
+                                <h3 class="card__title fw-bold">Ver y Editar Redes Sociales</h3>
+                            </div>
+                        </div>
+                        <p class="card__description">Desde aquí podrás acceder al listado de tus redes sociales oficiales que son visibles para el resto de usuarios.</p>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("Index", "SorteosEmpresas", new {@userName= User.Identity.Name})" class="card">
+                    <img src="~/Images/sorteos.jpg" class="card__image" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <div class="card__header-text">
+                                <h3 class="card__title fw-bold">Ver y Editar Sorteos</h3>
+                            </div>
+                        </div>
+                        <p class="card__description">Desde aquí podrás acceder al listado de tus sorteos que son visibles para el resto de usuarios.</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+    }
+
+    else if (User.IsInRole("Usuario"))
+    {
+
+        <head>
+            <link rel="stylesheet" href="~/Content/TarjetasUsuarios.css" />
+        </head>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary d-block p-3 mt-2 m-0 fw-bold float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            MI CUENTA
+        </button>
+        <br /><br />
+        <h2 class="text-center mt-3 mb-0 ">TU ESCRITORIO</h2>
+        <p class="text-center">IMPORTANTE! Mantené tus datos actualizados en "MI CUENTA". </p>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Opciones</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <a href="@Url.Action("CambiarContraseña", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Cambiar Contraseña</a>
+                        <a href="@Url.Action("ActualizarMail", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Cambiar Email</a>
+                        <a href="@Url.Action("ActualizarDatosTipoUsuario", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Actualizar Datos</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <ul class="cards">
+                        <li>
+                            <a href="@Url.Action("Create", "Denuncias", new {@userName= User.Identity.Name})" class="card">
+                                <img src="~/Images/denuncia.jpg" class="card__image" alt="" />
+                                <div class="card__overlay">
+                                    <div class="card__header">
+                                        <div class="card__header-text">
+                                            <h3 class="card__title fw-bold">Realizar Nueva Denuncia</h3>
+                                        </div>
+                                    </div>
+                                    <p class="card__description">Acceda al formulario para iniciar una nueva denuncia en la fiscalía.</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "Denuncias", new {@userName= User.Identity.Name})" class="card">
+                                <img src="~/Images/denuncias.jpg" class="card__image" alt="" />
+                                <div class="card__overlay">
+                                    <div class="card__header">
+                                        <div class="card__header-text">
+                                            <h3 class="card__title fw-bold">Mis Denuncias</h3>
+                                        </div>
+                                    </div>
+                                    <p class="card__description">Acceda al listado de las denuncias que realizó</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    }
+
+    else if (User.IsInRole("Fiscalia"))
+    {
+
+        <button type="button" class="btn btn-primary d-block p-3 mt-2 m-0 fw-bold float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            MI CUENTA
+        </button>
+        <br /><br />
+        <h2 class="text-center mt-3 mb-0 ">FISCALÍA </h2>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Opciones</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <a href="@Url.Action("CambiarContraseña", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Cambiar Contraseña</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <ul class="cards">
+            <li>
+                <a href="@Url.Action("DenunciasAbiertas", "Fiscalia", new {@userName= User.Identity.Name})" class="card">
+                    <img src="~/Images/open2.jpg" class="card__image p-4 pt-0" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <div class="card__header-text">
+                                <h3 class="card__title fw-bold">Denuncias Recibidas Abiertas</h3>
+                            </div>
+                        </div>
+                        <p class="card__description">Listado de denuncias abiertas.</p>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("DenunciasCerradas", "Fiscalia", new {@userName= User.Identity.Name})" class="card">
+                    <img src="~/Images/close2.jpg" class="card__image p-3 pt-0" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <div class="card__header-text">
+                                <h3 class="card__title fw-bold">Denuncias Recibidas Cerradas</h3>
+                            </div>
+                        </div>
+                        <p class="card__description">Listado de denuncias cerradas.</p>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("Reportes", "Fiscalia", new {@userName= User.Identity.Name})" class="card">
+                    <img src="~/Images/reportes.jpg" class="card__image p-3 pt-0" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <div class="card__header-text">
+                                <h3 class="card__title fw-bold">Reportes</h3>
+                            </div>
+                        </div>
+                        <p class="card__description">Reportes sobre las denuncias recibidas.</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+        <br /> <br /> <br /><br /> <br />
+
+
+    }
+
+
+    else if (User.IsInRole("Administrador"))
+    {
+
+
+        <button type="button" class="btn btn-primary d-block p-3 mt-2 m-0 fw-bold float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            MI CUENTA
+        </button>
+        <br /><br />
+        <h2 class="text-center mt-3 mb-0 "> ADMINISTRADOR </h2>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Opciones</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <a href="@Url.Action("CambiarContraseña", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Cambiar Contraseña</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <ul class="cards">
+            <li>
+                <a href="@Url.Action("EmpresasVerificadas", "Admin", new {@userName= User.Identity.Name})" class="card">
+                    <img src="~/Images/check.png" class="card__image p-4 pt-0" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <div class="card__header-text">
+                                <h3 class="card__title fw-bold">Empresas Verificadas</h3>
+                            </div>
+                        </div>
+                        <p class="card__description">Listado de empresas verificadas.</p>
+                    </div>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="@Url.Action("EmpresasNoVerificadas", "Admin", new {@userName= User.Identity.Name})" class="card">
+                    <img src="~/Images/atencion.png" class="card__image p-4 pt-0" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <div class="card__header-text">
+                                <h3 class="card__title fw-bold">Empresas No Verificadas</h3>
+                            </div>
+                        </div>
+                        <p class="card__description">Listado de empresas no verificadas.</p>
+                    </div>
+                </a>
+            </li>
+
+
+
+            <li>
+                <a href="@Url.Action("Reportes", "Admin", new {@userName= User.Identity.Name})" class="card">
+                    <img src="~/Images/reportes.jpg" class="card__image p-3 pt-0" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <div class="card__header-text">
+                                <h3 class="card__title fw-bold">Reportes</h3>
+                            </div>
+                        </div>
+                        <p class="card__description">Reportes varios.</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+        <br /> <br /> <br /><br /> <br />
+
+
+
+    }
+
+
+}

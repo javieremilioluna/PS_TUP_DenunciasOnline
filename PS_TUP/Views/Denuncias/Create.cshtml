@@ -1,0 +1,335 @@
+﻿@using PS_TUP.Models
+@model Denuncias
+
+@{
+    ViewBag.Title = "Nueva Denuncia";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/Sorteos.css" />
+</head>
+
+@using (Html.BeginForm("Create", "Denuncias", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+
+    <br /> <br />
+           <body class="bg-light">
+               <div class="container ">
+                   <div class="row">
+                       <div class="col-md-8">
+                           <div class="wrapper">
+                               <div id="formContent">
+                                   <br />
+                                   <h3 class="h3 mb-3">NUEVA DENUNCIA</h3>
+                                   <p class="ps-3 pe-3">
+                                       <b>IMPORTANTE!</b> 
+                                       @{
+
+                                           if (@ViewBag.tienePerfilActualizado == 0)
+                                           {
+                                               
+                                           <p style="color:red; font-size:18px;" class="mt-0 fw-bold">
+                                               Tus datos no están actualizados <br /> Hazlo desde <a href="@Url.Action("ActualizarDatosTipoUsuario", "Cuenta", new {@userName= User.Identity.Name})" target="_blank"> <b>aquí.</b></a>
+                                           </p>
+
+                                            }
+                                  
+                                       }
+
+
+                                       @*Antes de iniciar una denuncia es necesario que tus datos estén actualizados. <br /> Si no lo hiciste actualizalos desde <a href="@Url.Action("ActualizarDatosTipoUsuario", "Cuenta", new {@userName= User.Identity.Name})" target="_blank"> <b>aquí.</b></a>*@
+                                       
+                                       <p>
+                                       Si la víctima es <b>menor de edad</b>, la denuncia debe ser realizada por uno de sus <br /> progenitores o tutor legal.
+                                       </p>
+
+                                       @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+                                       <form>
+
+                                           @Html.DropDownList("IdTipoDenuncia", items, "Motivo de la Denuncia", htmlAttributes: new { @class = "dropDown", id = "combo" })
+                                           @Html.ValidationMessageFor(model => model.IdTipoDenuncia, "", new { @class = "text-danger" })
+
+                                           @Html.TextAreaFor(model => model.Descripcion, 10, 40, new { @class = "dropDown", style = "max-width:100% !important;", @maxlength = "1990", @placeholder = "DESCRIPCIÓN" })
+                                           @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+
+                                           <label class="col-sm-6 pt-2 fw-bold ">PRUEBAS:</label>
+                                           <hr class="ms-5 me-5" />
+
+                                           <label class="col-sm-6 fw-bold">IMAGEN 1 (.JPG/.PNG)</label>
+                                           <input class="form-label img-fluid p-2 dropDown" type="file" accept=".jpg,.png" name="imageLoad1" />
+
+                                           <label class="col-sm-6 fw-bold">IMAGEN 2 (.JPG/.PNG)</label>
+                                           <input class="form-label img-fluid p-2 dropDown" type="file" accept=".jpg,.png" name="imageLoad2" />
+
+                                           <label class="col-sm-6 fw-bold">ARCHIVO .PDF</label>
+                                           <input class="form-label img-fluid p-2 dropDown" type="file" accept=".pdf" name="file" />
+
+                                           <label class="col-sm-6 fw-bold">ARCHIVO DE AUDIO 1 (.MP3)</label>
+                                           <input class="form-label img-fluid p-2 dropDown" type="file" accept=".mp3" name="file" />
+
+                                           <label class="col-sm-6 fw-bold">ARCHIVO DE AUDIO 2 (.MP3)</label>
+                                           <input class="form-label img-fluid p-2 dropDown" type="file" accept=".mp3" name="file" />
+
+                                           <hr class="ms-5 me-5" />
+
+                                           @*<div id="texto2">
+                                                Delito
+                                                <select id="texto" name="texto"></select>
+                                            </div>*@
+
+
+                                           @{
+
+                                               if (@ViewBag.tienePerfilActualizado == 0)
+                                               {
+                                                   <div class=" pb-2 pt-0  wrapper">
+                                                       <button class="btn-outline-secondary" disabled>CONFIRMAR</button>
+                                                   </div>
+
+                                                   @*<p style="color:red; font-size:18px;" class="pt-2 fw-bold">
+                                                       Tus datos no están actualizados <br /> Hazlo desde <a href="@Url.Action("ActualizarDatosTipoUsuario", "Cuenta", new {@userName= User.Identity.Name})" target="_blank"> <b>aquí.</b></a>
+                                                   </p>*@
+
+
+
+                                               }
+
+                                               else
+                                               {
+                                                   <div class=" pb-0   wrapper">
+                                                       <input type="submit" class="" value="CONFIRMAR">
+                                                   </div>
+                                               }
+                                           }
+
+
+
+                                           <div class="pb-5 pt-0">
+                                               <a href="@Url.Action("VerDatos", "Cuenta")" class="btn btn-light">Cancelar</a>
+                                           </div>
+
+
+
+
+                                       </form>
+
+                                   </div>
+                           </div>
+                       </div>
+
+                   
+                       <div class="col-md-4 ">
+                           <div class="">
+                               <div id="formContentInfo">
+                                    <br />
+                                   <h3 class="pt-1 ps-4 pe-4">MAS INFORMACIÓN SOBRE MOTIVOS DE DENUNCIAS</h3>
+
+                                   <div class="accordion accordion-flush" id="accordionFlushExample">
+                                       <div class="accordion-item">
+                                           <h2 class="accordion-header" id="flush-headingOne">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                   Amenazas por medios digitales&nbsp
+                                               </button>
+                                           </h2>
+                                           <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                               <div class="accordion-body text-start">
+                                                   Una amenaza es un gesto, una expresión o una acción que anticipa la intención de dañar a alguien en caso de que la persona amenazada no cumpla con ciertas exigencias. El concepto también puede emplearse con referencia al inminente desarrollo de algo negativo.
+                                                   <br /> Contempla casos donde una o más personas hicieren uso de amenazas para:
+                                                   <br /> -  Alarmar o amedrentar a una o más personas.
+                                                   <br /> -  Obligar a otro a hacer, no hacer o tolerar algo contra su voluntad.
+                                                   <br /> - Obtener alguna medida o concesión por parte de cualquier miembro de los poderes públicos.
+
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="accordion-item">
+                                           <h2 class="accordion-header" id="flush-headingTwo">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                   Acceso indebido a sistemas informáticos&nbsp
+                                               </button>
+                                           </h2>
+                                           <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                               <div class="accordion-body text-start">
+                                                   Este ciberdelito, guarda relación con una figura conocida en el ciberespacio con el nombre de “hacker”,
+                                                   clave para el acceso ilegitimo en un sistema o dato informático. Un hacker es una persona o grupo de personas con amplios conocimientos
+                                                   y gran habilidad en el manejo de los sistemas informáticos, que tiene el poder de analizar, verificar las vulnerabilidades de seguridad de
+                                                   los sistemas, pudiendo producir un daño o no o realizar modificaciones. Con dominio en lenguajes de programación, manipulación de hardware y
+                                                   software, telecomunicaciones. Ese gran dominio les permite vulnerar los sistemas y acceder ilegalmente.
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                       <div class="accordion-item">
+                                           <h2 class="accordion-header" id="flush-headingThree">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                                   Acoso a menores de edad (Grooming) &nbsp
+                                               </button>
+                                           </h2>
+                                           <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                               <div class="accordion-body text-start">
+                                                   El grooming es la acción deliberada de un adulto, varón o mujer, de acosar sexualmente a una niña, niño o adolescente a través de un medio
+                                                   digital que permita la interacción entre dos o más personas, como por ejemplo redes sociales, correo electrónico, mensajes de texto,
+                                                   sitios de chat o juegos en línea.
+
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                       <div class="accordion-item">
+                                           <h2 class="accordion-header" id="flush-heading4">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse4" aria-expanded="false" aria-controls="flush-collapse4">
+                                                   Cyberbullying &nbsp
+                                               </button>
+                                           </h2>
+                                           <div id="flush-collapse4" class="accordion-collapse collapse" aria-labelledby="flush-heading4" data-bs-parent="#accordionFlushExample">
+                                               <div class="accordion-body text-start">
+                                                   El cyberbullying tiene lugar cuando una persona menor sufre amenazas, hostigamiento, humillación u otro tipo de molestias de forma
+                                                   reiterada y deliberada (es decir, a propósito) por parte de otras personas menores a través de medios electrónicos.
+                                                   Este acoso se puede dar mediante la publicación de textos, imágenes, videos y audios a través de los distintos medios digitales
+                                                   como redes sociales (Facebook, Instagram, Twitter), mensajería instantánea (WhatsApp), correo electrónico, aplicaciones, videojuegos, etc.
+
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                       <div class="accordion-item">
+                                           <h2 class="accordion-header" id="flush-heading5">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
+                                                   Extorsión por medios digitales &nbsp
+                                               </button>
+                                           </h2>
+                                           <div id="flush-collapse5" class="accordion-collapse collapse" aria-labelledby="flush-heading5" data-bs-parent="#accordionFlushExample">
+                                               <div class="accordion-body text-start">
+                                                   La extorsión es un delito consistente en obligar a una persona, a través de la utilización de violencia o intimidación,
+                                                   a realizar u omitir un acto o negocio jurídico con ánimo de lucro y con la intención de producir un perjuicio de carácter
+                                                   patrimonial o bien del sujeto pasivo.
+
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                       <div class="accordion-item">
+                                           <h2 class="accordion-header" id="flush-heading6">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse6" aria-expanded="false" aria-controls="flush-collapse6">
+                                                   Ciberacoso u hostigamiento &nbsp
+                                               </button>
+                                           </h2>
+                                           <div id="flush-collapse6" class="accordion-collapse collapse" aria-labelledby="flush-heading6" data-bs-parent="#accordionFlushExample">
+                                               <div class="accordion-body text-start">
+                                                   Consiste en el envío reiterado de mensajes ofensivos de una persona o grupo hacia una víctima. Pueden ser desde insultos, el uso de apodos,
+                                                   generar rumores o enviar mensajes despectivos a través de redes sociales, aplicaciones de mensajería o correo electrónico.
+                                                   Muchas formas de ciberacoso caen en hostigamiento, como el envío de imágenes que buscan afectar la moral y autoestima de la víctima.
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                       <div class="accordion-item">
+                                           <h2 class="accordion-header" id="flush-heading7">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse7" aria-expanded="false" aria-controls="flush-collapse7">
+                                                   Phishing &nbsp
+                                               </button>
+                                           </h2>
+                                           <div id="flush-collapse7" class="accordion-collapse collapse" aria-labelledby="flush-heading7" data-bs-parent="#accordionFlushExample">
+                                               <div class="accordion-body text-start">
+                                                   Phishing es el delito de engañar a las personas para que compartan información confidencial como contraseñas y números de tarjetas de crédito.
+                                                   Como ocurre en la pesca, existe más de una forma de atrapar a una víctima, pero hay una táctica de phishing que es la más común. Las víctimas
+                                                   reciben un mensaje de correo electrónico o un mensaje de texto que imita (o “suplanta su identidad”) a una persona u organización de confianza,
+                                                   como un compañero de trabajo, un banco o una oficina gubernamental. Cuando la víctima abre el correo electrónico o el mensaje de texto, encuentra
+                                                   un mensaje pensado para asustarle, con la intención de debilitar su buen juicio al infundirle miedo. El mensaje exige que la víctima vaya a un sitio
+                                                   web y actúe de inmediato o tendrá que afrontar alguna consecuencia.
+                                               </div>
+                                           </div>
+                                       </div>
+
+
+                                       <div class="accordion-item">
+                                           <h2 class="accordion-header" id="flush-heading8">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse8" aria-expanded="false" aria-controls="flush-collapse8">
+                                                   Pornografía infantil &nbsp
+                                               </button>
+                                           </h2>
+                                           <div id="flush-collapse8" class="accordion-collapse collapse" aria-labelledby="flush-heading8" data-bs-parent="#accordionFlushExample">
+                                               <div class="accordion-body text-start">
+                                                   Se denomina pornografía infantil a toda divulgación y representación de menores de edad de cualquier sexo en conductas sexualmente explícitas.
+                                                   Puede tratarse de representaciones visuales, descriptivas, como por ejemplo en ficción, o incluso sonoras.
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                       <div class="accordion-item">
+                                           <h2 class="accordion-header" id="flush-heading9">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse9" aria-expanded="false" aria-controls="flush-collapse9">
+                                                   Sextorsión &nbsp
+                                               </button>
+                                           </h2>
+                                           <div id="flush-collapse9" class="accordion-collapse collapse" aria-labelledby="flush-heading9" data-bs-parent="#accordionFlushExample">
+                                               <div class="accordion-body text-start">
+                                                   La sextorsión o extorsión sexual es una forma de explotación sexual, en la cual una persona es inducida o chantajeada —generalmente por
+                                                   aplicaciones de mensajería por Internet— con una imagen o vídeo de sí misma desnuda o realizando actos sexuales, mediante sexting.
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                       <div class="accordion-item">
+                                           <h2 class="accordion-header" id="flush-heading10">
+                                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse10" aria-expanded="false" aria-controls="flush-collapse10">
+                                                   Viralización de informacion personal &nbsp 
+                                               </button>
+                                           </h2>
+                                           <div id="flush-collapse10" class="accordion-collapse collapse" aria-labelledby="flush-heading10" data-bs-parent="#accordionFlushExample">
+                                               <div class="accordion-body text-start">
+                                                   Consiste en la divulgación de información personal sensible de una personal por redes sociales, blogs, etc. 
+                                                   También contempla su aparición en motores de búsqueda como por ejemplo Google o Bing.
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                       <br /> <br />
+                                   </div>
+                               </div>
+                           </div>                     
+                       </div>
+
+                   </div>
+               </div>
+
+               <br /> <br /><br /><br /><br /><br />
+           </body>
+
+}
+
+    @*<script>
+
+        var cboSeleccionado = document.getElementById("combo");
+        cboSeleccionado.addEventListener("change", Refresh);
+        Refresh();
+
+
+           function Refresh() {
+
+           fetch("@Url.Content("~/Denuncias/Denuncias")" + "?IdMotivo="+"2")
+            .then(function (result) {
+             if (result.ok) {
+             return result.json();
+            }
+             })
+            .then(function (data) {
+            console.log(data);
+            cbo = document.getElementById("texto");
+            cbo.innerHTML = "";
+            data.forEach(function (element) {
+
+             let p = document.createElement("option");
+             p.appendChild(document.createTextNode(element.Text));
+             p.value = element.Value;
+
+             cbo.appendChild(p);
+            })
+            })
+
+            }
+    </script>*@

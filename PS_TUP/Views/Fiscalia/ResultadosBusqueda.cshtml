@@ -1,0 +1,139 @@
+﻿@using PS_TUP.Models.DTO
+@model FiltroRangoFechas
+
+
+@{
+    ViewBag.Title = "ResultadosBusqueda";
+
+}
+
+<br /><br />
+<h2 class="text-center">Resultados de tu búsqueda</h2>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 ">
+
+
+            <hr />
+            <h2 class="text-center">Cantidad de Denuncias por Tipo/Motivo entre el <b>@ViewBag.fechaDesde.ToString("dd/MM/yyyy")</b>  y el <b> @ViewBag.fechaHasta.ToString("dd/MM/yyyy")</b> </h2>
+            <canvas class="my-4 w-100" id="myChart2" width="400" height="150"></canvas>
+        </div>
+
+
+        <div>
+            @using (Html.BeginForm("ResultadosBusqueda", "Fiscalia", FormMethod.Get))
+            {
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+                <form class="text-center" id="buscar" name="buscar" role="search">
+                    <h3 class="">Filtrar por rango de fechas: </h3>
+
+                    <b>Desde: </b> @Html.EditorFor(model => model.fechaDesde, new { htmlAttributes = new { @class = "dropDown", @min = "2019-01-01", @max = "2021-11-01", required = "required" } })
+                    &nbsp; &nbsp; <b>Hasta: </b> @Html.EditorFor(model => model.fechaHasta, new { htmlAttributes = new { @class = "dropDown", @min = "2019-01-01", @max = "2021-11-01", required = "required" } })
+
+                    &nbsp; &nbsp; <input type="submit" id="buscar" class="btn-close-white" value="Buscar">
+                </form>
+            }
+
+            <br /> <br />
+        </div>
+
+        <hr />
+
+        <br /><br />
+        <div class="text-center">
+            <a href="@Url.Action("Reportes","Fiscalia")" class="btn btn-link text-decoration-none"> < Volver</a>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@section scripts
+ {
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.js" integrity="sha512-XcsV/45eM/syxTudkE8AoKK1OfxTrlFpOltc9NmHXh3HF+0ZA917G9iG6Fm7B6AzP+UeEzV8pLwnbRNPxdUpfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+
+                'Amenazas',
+                'Acceso indebido a sistemas informáticos',
+                'Acoso a menores de edad(Grooming)',
+                'Ciberbullying',
+                'Extorsión por medios digitales',
+                'Ciberacoso u hostigamiento',
+                'Phishing(fraude o estafa informática)',
+                'Pornografía infantil',
+                'Sextorsión o distribución de imágenes intimas',
+                //'Usurpación / Suplantación de identidad',
+                'Viralización de información personal',
+
+            ],
+            datasets: [{
+                label: 'Total de denuncias',
+                data: [
+
+
+                         @{
+                                foreach (var item in @ViewBag.resultado)
+                                {
+
+                                    string number = item.cantidad.ToString();
+                                    int[] digits = number.Select(c => Convert.ToInt32(c.ToString())).ToArray();
+
+                                    foreach (var nro in digits)
+                                    {
+
+                                        @($"{nro},")
+                                    }
+                                }
+                            }
+
+                ],
+
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+
+
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+
+}
+
+

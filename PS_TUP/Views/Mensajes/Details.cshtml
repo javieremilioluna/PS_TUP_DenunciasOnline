@@ -1,0 +1,74 @@
+﻿@model PS_TUP.Mensajes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Mensajes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdDenuncia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdDenuncia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mensaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mensaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imagen1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imagen1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Archivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Archivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdMensaje }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

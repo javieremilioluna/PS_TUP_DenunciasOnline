@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Denuncias";
+}
+
+
+
+@if (User.Identity.IsAuthenticated)
+
+{
+    <head>
+        <link rel="stylesheet" href="~/Content/TarjetasUsuarios.css" />
+    </head>
+
+    if (User.IsInRole("Usuario"))
+
+    {
+
+        <button type="button" class="btn btn-primary d-block p-3 mt-2 m-0 fw-bold float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            MI CUENTA
+        </button>
+        <br /><br />
+        <h2 class="text-center mt-3 mb-0 ">TU ESCRITORIO</h2>
+        <p class="text-center">IMPORTANTE! Mantené tus datos actualizados en "MI CUENTA". </p>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Opciones</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <a href="@Url.Action("CambiarContraseña", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Cambiar Contraseña</a>
+                        <a href="@Url.Action("ActualizarMail", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Cambiar Email</a>
+                        <a href="@Url.Action("ActualizarDatosTipoUsuario", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3 fw-bolder">Actualizar Datos</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <ul class="cards">
+                        <li>
+                            <a href="@Url.Action("Create", "Denuncias", new {@userName= User.Identity.Name})" class="card">
+                                <img src="~/Images/denuncia.jpg" class="card__image" alt="" />
+                                <div class="card__overlay">
+                                    <div class="card__header">
+                                        <div class="card__header-text">
+                                            <h3 class="card__title fw-bold">Realizar Nueva Denuncia</h3>
+                                        </div>
+                                    </div>
+                                    <p class="card__description">Acceda al formulario para iniciar una nueva denuncia en la fiscalía.</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "Denuncias", new {@userName= User.Identity.Name})" class="card">
+                                <img src="~/Images/denuncias.jpg" class="card__image" alt="" />
+                                <div class="card__overlay">
+                                    <div class="card__header">
+                                        <div class="card__header-text">
+                                            <h3 class="card__title fw-bold">Mis Denuncias</h3>
+                                        </div>
+                                    </div>
+                                    <p class="card__description">Acceda al listado de las denuncias que realizó</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+
+else
+{
+    <br /> <br />
+
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-md-6 ">
+                <hr class="" style="width:104%" />
+                <br />
+                <h3 class="text-center">INFORMACIÓN</h3>
+                <p class="">
+                    Las denuncias son tramitadas por la Fiscalía Especializada en Ciberdelincuencia dependiente del
+                    Ministerio Público Fiscal, con el fin de robustecer la capacidad de respuesta del organismo en materia de detección, persecución y
+                    represión de la criminalidad organizada y de los delitos que más menoscaban la seguridad ciudadana vinculados a las nuevas tecnologías. <br />
+                    <b>Dirección:</b> Bv. San Juan 800, 5° Piso, Ciudad de Córdoba. <br />
+                    <b>Teléfono:</b> (351) 2222-0000
+                </p>
+                <br />
+                <div class="col-12 d-flex align-items-center justify-content-center ">
+                    <img src="~/Images/ciberdelicuencia.jpg" class="img-fluid" style="width:95%; border-radius: 30px;" />
+                </div>
+
+            </div>
+
+            <div class="col-md-6 @*d-flex align-items-center*@ justify-content-center ">
+                <hr />
+                <div class="">
+                    <div class="text-center col-12 p-4">
+
+                        <h3 class="text-center">ACCESO</h3>
+                        <p class="text-center">Para poder hacer una denuncia deberás iniciar sesión si ya tenés cuenta <br /> o bien registrarte si no estas registrado.</p>
+                        <a href="@Url.Action("Login", "Cuenta", new { })" class="btn btn-primary ps-5 pe-5 mb-2 ">Iniciar Sesión</a> <br>
+                        <a href="@Url.Action("Registro", "Cuenta", new { })" class="btn btn-light mt-0">Registrarse</a>
+                        <br /><br />
+                        <img src="~/Images/mpf.jpg" class="img-fluid rounded-3" />
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <br /><br /><br />
+}
+
+
+

@@ -1,0 +1,108 @@
+﻿
+@model IEnumerable<PS_TUP.Models.GestionFiscalia.DenunciaDesdeFiscalia>
+
+@{
+    /**/
+
+    ViewBag.Title = "Denuncias Abiertas";
+}
+
+
+<br /><br />
+<h2 class="text-center">DENUNCIAS ABIERTAS</h2>
+
+
+@if (Model.LongCount() >= 1)
+{
+    <p class="text-center">  Resultados:</p>
+    <br />
+}
+else if (Model.LongCount() == 0)
+{
+    <p class="text-center">&nbsp Lo sentimos, no se han encontrado resultados para tu búsqueda.</p>
+    <br /> <br /> <br />
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover">
+            <tbody>
+                <tr>
+
+                    <th class="align-middle">
+                        <label>ID DENUNCIA</label>
+                    </th>
+
+                    <th class="align-middle">
+                        <label>MOTIVO DENUNCIA</label>
+                    </th>
+
+                    <th class="align-middle">
+                        <label>FECHA DENUNCIA</label>
+                    </th>
+
+                    <th class="align-middle">
+                        <label>DNI DENUNCIANTE</label>
+                    </th>
+
+                    <th class="align-middle">
+                        <label>NOMBRE DENUNCIANTE</label>
+                    </th>
+
+                    <th class="align-middle">
+                        <label>ESTADO</label>
+                    </th>
+
+                    <th class="align-middle"></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td class="align-middle ">
+                            @Html.DisplayFor(modelItem => item.IdDenuncia)
+                        </td>
+
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.IdTipoDenuncia)
+                        </td>
+
+                        <td class="align-middle ">
+                            @item.Fecha.ToString("dd/MM/yyyy")
+                        </td>
+
+                        <td class="align-middle ">
+                            @Html.DisplayFor(modelItem => item.DNI)
+                        </td>
+
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.apellido)
+                        </td>
+
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.activa)
+                        </td>
+
+                        <td class="align-middle ">
+                            <a href=" @Url.Action("DetalleDenunciaVistaFiscalia", "Fiscalia", new { @id = item.IdDenuncia })" class=" btn btn-lg text-dark edit-button "><i class="far fa-eye"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <p class="text-center">
+            @Html.ActionLink("< Regresar", "DenunciasAbiertas", "Fiscalia")
+        </p>
+        <p class="text-center">
+            @Html.ActionLink("Ir a Denuncias Cerradas", "DenunciasCerradas", "Fiscalia")
+        </p>
+        <p class="text-center">
+            @Html.ActionLink("< Inicio", "VerDatos", "Cuenta")
+        </p>
+    </div>
+</div>
+
+<br /><br /><br /><br /><br /><br /><br />

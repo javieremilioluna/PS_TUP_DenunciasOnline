@@ -1,0 +1,52 @@
+﻿@model PS_TUP.Models.Usuario
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <head>
+        <link rel="stylesheet" href="~/Content/Login.css" />
+    </head>
+
+    <body class="bg-light">
+        <br /> <br /><br />
+        <div class="wrapper">
+            <div id="formContent">
+                <br />
+                <div class="fadeIn first">
+                    <img class="mb-4" src="~/images/login4.png" width="200" height="200" />
+                </div>
+                <h3 class="h3 mb-3">Iniciar Sesión</h3>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+
+                <form>
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "", @id = "login", @placeholder = "Nombre de Usuario", @name = "login", @maxlength = "30" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "editor", @id = "password", @placeholder = "Contraseña", @name = "password", @maxlength = "20" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    <br />
+                    <input type="submit" class="editor" value="Ingresar">
+                </form>
+
+                <div id="formFooter">
+                    <label class="pregunta">
+                        ¿No tiene cuenta? @Html.ActionLink("Registrarse", "Registro", new { area = "" }, new { @class = "underlineHover" })
+                    </label>
+                </div>
+                
+                <div id="formFooter">
+                    <a class="underlineHover" href="@Url.Action("RecuperarContraseña", "Cuenta", new {@userName= User.Identity.Name})" >Olvidó su contraseña?</a>
+                </div>
+            </div>
+        </div>
+        <br /> <br /><br /><br /><br />
+
+    </body>
+}
+

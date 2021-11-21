@@ -1,0 +1,71 @@
+﻿
+@using PS_TUP.Models
+@model SorteosEmpresas
+
+
+@{
+    ViewBag.Title = "Agregar Sorteo";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/Sorteos.css" />
+</head>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+
+
+    <br /> <br />
+           <body class="bg-light">
+               <div class="container ">
+                   <div class="wrapper">
+                       <div id="formContent">
+                           <br />
+                           <h3 class="h3 mb-3">Agregar Sorteo</h3>
+                           @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+                           <form>
+
+                               @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "", @id = "TITULO", @placeholder = "TITULO", @name = "TITULO", @maxlength = "140" } })
+                               @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+
+                               @*@Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "", @id = "", @placeholder = "DESCRIPCIÓN", @name = "", @maxlength = "1990" } })*@
+                               @Html.TextAreaFor(model => model.Descripcion, 7, 40, new { @class = "dropDown", style = "max-width:100% !important;", @maxlength = "1990", @placeholder = "DESCRIPCIÓN" })
+                               @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+
+                               <label class="col-sm-6 fw-bold">FECHA DE INICIO</label>
+                               @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "dropDown" } })
+                               @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+
+                               <label class="col-sm-6 fw-bold">FECHA DE FIN</label>
+                               @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "dropDown" } })
+                               @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+
+                               @Html.TextAreaFor(model => model.Ganadores, 10, 40, new { @class = "dropDown", style = "max-width:100% !important;", @maxlength = "1990", @placeholder = "GANADORES" })
+                               @Html.ValidationMessageFor(model => model.Ganadores, "", new { @class = "text-danger" })
+
+                               @Html.DropDownListFor(model => model.Activo, new SelectList(Enum.GetValues(typeof(Activo))), "VIGENTE:", new { @class = "dropDown " })
+                               @Html.ValidationMessageFor(model => model.Activo, null, new { @class = "text-danger" })
+
+                               <br />
+                               <div class=" pb-0 wrapper">
+                                   <input type="submit" class="" value="CONFIRMAR">
+                               </div>
+
+                               <div class="pb-5 pt-0">
+                                   <a href="@Url.Action("Index")" class="btn btn-light">Cancelar</a>
+                               </div>
+                           </form>
+
+                       </div>
+                   </div>
+               </div>
+
+               <br /> <br /><br /><br /><br /><br /><br /> <br />
+           </body>
+
+}
+

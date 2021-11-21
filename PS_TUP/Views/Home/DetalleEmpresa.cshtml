@@ -1,0 +1,114 @@
+﻿@model PS_TUP.Models.TipoEmpresa.Empresas
+
+@{
+   
+    ViewBag.Title = Model.nombreComercial.ToUpper();
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/Empresas.css" />
+</head>
+<br /><br />  <br /><br />
+
+
+<div class="container-fluid">
+    <div class="wrapper">
+        <div id="formContent">
+            <div class="row d-flex align-items-center ">
+                <div class=" col-md-6  text-uppercase">
+                    <br />
+                    <h4 class=" fw-bold gris pt-lg-3 pt-sm-3 pb-2">  @Html.DisplayFor(Model => Model.nombreComercial, new { @class = "" })</h4>
+                    <p class="fw-bold gris "> CUIT: @Html.DisplayFor(modelItem => Model.CUIT, new { @class = "" })</p>
+                    <p class="fw-bold gris ps-2 pe-2"> RAZÓN SOCIAL: <br /> @Html.DisplayFor(modelItem => Model.razonSocial, new { @class = "" })</p>
+
+                    <div class="div">
+                        <p class="fw-bold gris ps-2 pe-2">
+                            WEB OFICIAL:
+                           <br /> <a class=" ps-2 pe-2  fw-bold" href="@Model.paginaWeb" target="_blank">@Html.DisplayFor(modelItem => Model.paginaWeb, new { @class = "" })</a>
+                        </p>
+                    </div>
+
+
+                        <div class=" ms-lg-3 m-md-1 ms-sm-1 ">
+                            <p class="fw-bold gris ps-lg-1 mb-1 "> MEDIOS DE CONTACTO Y SORTEOS OFICIALES:</p>
+                            <a href="@Url.Action("TelefonosEmpresa", "Home", new {UserName= Model.UserName, idEmpresa = Model.idEmpresa})" class="btn btn-primary pt-2 pb-2 mb-0 d-block fw-bold"> <p class="wrapper" style="margin-bottom:0px;">TELÉFONOS</p> </a>
+                            <a href="@Url.Action("MailsEmpresa", "Home", new {UserName= Model.UserName , idEmpresa = Model.idEmpresa})" class="btn btn-primary pt-2 pb-2 mb-0 d-block fw-bold"> <p class="wrapper" style="margin-bottom:0px;">EMAILS</p> </a>
+                            <a href="@Url.Action("RedesSociales", "Home", new {UserName= Model.UserName , idEmpresa = Model.idEmpresa})" class="btn btn-primary pt-2 pb-2 mb-0 d-block fw-bold"> <p class="wrapper" style="margin-bottom:0px;">REDES SOCIALES</p> </a>
+                            <a href="@Url.Action("SorteosEmpresa", "Home", new {UserName= Model.UserName, idEmpresa = Model.idEmpresa})" class="btn btn-primary pt-2 pb-2 d-block fw-bold"> <p class="wrapper" style="margin-bottom:0px;">SORTEOS</p> </a>
+                        </div>
+           
+               
+                </div>
+
+                <div class="col-md-6 mb-sm-5 ">
+
+                    <img class="img-fluid p-3 mt-sm-0" src="@Url.Action("getImage", "Home", new { UserName = Model.UserName })" style="max-height:200px; border-radius: 35px;" />
+                    <p>VERIFICADA</p>
+                    <img class="img-fluid mb-lg-2  " src="~/Images/check.jpg" style="max-height:50px;" />
+                    <br />
+                    @{
+
+                        if (User.IsInRole("Administrador"))
+                        {
+                            <div class=" text-center">
+                                <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Quitar Verificación
+                                </button>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Quitar Verificación?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="@Url.Action("QuitarVerificacion", "Admin", new {@id=Model.idEmpresa})" class="btn btn-danger">QUITAR VERIFICACIÓN</a>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+@{
+    if (User.IsInRole("Administrador"))
+    {
+        <div class="text-center">
+            <a href="@Url.Action("EmpresasVerificadas", "Admin", new { })" class="btn btn-light p-4 underlineHover"> < Regresar</a>
+        </div>
+    }
+
+    else
+    {
+        <br />
+        <div class="text-center">
+            <a href="@Url.Action("Empresas", "Home", new {@idEmpresa= Model.idEmpresa})" class="btn btn-light underlineHover"> < Empresas</a>
+        </div>
+
+        <div class="text-center">
+            <a href="@Url.Action("Index", "Home", new {@idEmpresa= Model.idEmpresa})" class="btn btn-light pt-3 underlineHover"> < Inicio </a>
+        </div>
+
+
+    }
+
+}
+
+
+
+
+<br />  <br />  <br />

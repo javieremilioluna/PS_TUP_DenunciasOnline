@@ -1,0 +1,67 @@
+﻿@model PS_TUP.Denuncias
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<br /><br />
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6">
+            <h2 class="text-uppercase">Detalle de tu Denuncia por @Model.IdTipoDenuncia</h2>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <label>MOTIVO DENUNCIA</label>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IdTipoDenuncia)
+                </dd>
+
+                <dt>
+                    <label>DESCRIPCIÓN</label>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descripcion)
+                </dd>
+
+                <dt>
+                    <label>FECHA</label>
+                </dt>
+
+                <dd>
+                    @Model.Fecha.ToString("dd/MM/yyyy")
+                </dd>
+
+                <dt>
+                    <label>ESTADO</label>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.activa)
+                </dd>
+
+            </dl>
+        </div>
+
+
+        <div class="col-md-5 d-flex align-items-center ">
+            <div class="btn-group-vertical moverDiv">
+                <br />
+                <a href="@Url.Action("MensajesDenunciasCerradasVistaUsuario", "Mensajes", new {@id= Model.IdDenuncia})" class="btn btn-primary">Ver Mensajes</a>
+                <a href="@Url.Action("DenunciasCerradasVistaUsuario")" class="btn btn-light ps-5">Volver</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<br /><br /><br /><br /><br /><br />
+
+

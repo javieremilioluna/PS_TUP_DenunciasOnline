@@ -1,0 +1,190 @@
+﻿body {
+    padding-top: 60px;
+    padding-bottom: 0px;
+    /*font-family: 'Roboto', sans-serif;*/
+}
+
+/* Set padding to keep content from hitting the edges */
+/*.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}*/
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+/*.dl-horizontal dt {
+    white-space: normal;
+}*/
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+
+
+.div {  
+    height: auto;
+    width: 100%;
+    word-wrap: break-word;
+ 
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+}
+
+.tbl-container {
+    width: 100%;  
+}
+
+
+.bdr {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.moverDiv
+{
+    padding-left: 150px;
+}
+
+.moverDivTop {
+    margin-top: 50px;
+}
+
+@media screen and (max-width: 767px) {
+    .moverDivTop {
+        margin-top: 10px;
+    }
+}
+
+
+.nav {
+    color: #ffffff;
+}
+
+.bg-azul {
+    background: #0481CB;
+}
+
+.btn-azul {
+    color: #fff;
+    background-color: #0481CB;
+    border-color: #0481CB;
+}
+
+/*Mover menu a la izquierda en pantallas chicas*/
+@media screen and (max-width: 767px) {
+    .menu_izquierda {
+        float: left;
+    }
+}
+/*usar este codigo si se usa icono con dropdownlist, a su vez modificas en bootstarp css .nav-link {
+  display:block;}*/
+/*.icono_acceso {
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-top: 6px;
+    margin-left: 10px;
+    margin-right: 4px;
+}
+
+    @media screen and (max-width: 991px) {
+    .icono_acceso {
+        margin-top: 4px;
+        margin-left: -5px;
+        margin-right: 5px;
+    }
+}
+
+*/
+
+.icono_acceso {
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-top: 4px;
+    margin-left: 10px;
+    margin-right: -4px;
+
+}
+
+@media screen and (max-width: 991px) {
+    .icono_acceso {
+        margin-top: 4px;
+        margin-left: -5px;
+        margin-right: 5px; 
+    }
+}
+
+
+.acceso {
+    float: left;
+}
+.cartel_izquierda {
+    margin-top: 20px;
+}
+
+.cartel_derecha {
+    margin-top: 20px;
+}
+
+
+
+
+/*CSS DE LOGIN*/
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    margin: auto;
+}
+
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+
+    .form-signin .form-floating:focus-within {
+        z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+
+/* FIN CSS DE LOGIN*/
+

@@ -1,0 +1,106 @@
+﻿@model IEnumerable<PS_TUP.SorteosEmpresas>
+
+
+@{
+    ViewBag.Title = "Redes Sociales";
+    PS_TUP.Models.TipoEmpresa.Empresas empresa = (PS_TUP.Models.TipoEmpresa.Empresas)ViewBag.empresa;
+}
+
+@{
+
+    var items = empresa;
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/Empresas.css" />
+</head>
+
+<h2 class="text-center p-5 text-uppercase">Sorteos organizados por @items.nombreComercial </h2>
+
+
+@if (Model.LongCount() >= 1)
+{
+    <p class="text-center">  </p>
+   
+}
+else if (Model.LongCount() == 0)
+{
+    <p class="text-center">&nbsp La empresa no ha informado sorteos.</p>  
+}
+
+<div class="row justify-content-center  ">
+    <div class="col-md-12 ">
+        <table class="table table-striped table-hover tbl-container bdr ">
+            <tbody>
+                <tr>
+                    <th class="align-middle text-center">
+                        <label>TÍTULO</label>
+                    </th>
+
+                    <th class="align-middle text-center">
+                        <label>DESCRIPCIÓN</label>
+                    </th>
+
+                    <th class="align-middle text-center">
+                        <label>FECHA DE INICIO</label>
+                    </th>
+
+                    <th class="align-middle text-center">
+                        <label>FECHA DE FIN</label>
+                    </th>
+
+                    <th class="align-middle text-center">
+                        <label>VIGENTE</label>
+                    </th>
+
+                    <th class="align-middle text-center">
+                        <label>GANADORES</label>
+                    </th>
+
+                </tr>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr class="">
+                        <td class="align-middle text-center">
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+
+                        <td class="align-middle text-center">
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+
+                        <td class="align-middle text-center">
+                            @item.FechaInicio.ToString("dd/MM/yyyy")
+                        </td>
+
+                        <td class="align-middle text-center">
+                            @item.FechaFin.ToString("dd/MM/yyyy")
+                        </td>
+
+                        <td class="align-middle text-center">
+                            @Html.DisplayFor(modelItem => item.Activo)
+                        </td>
+
+                        <td class="align-middle text-center">
+                            <a href="@Url.Action("GanadoresSorteo", "Home", new {idSorteo = item.IdSorteo ,idEmpresa = items.idEmpresa })" class=" btn btn-lg text-dark edit-button "><i class="far fa-eye"></i></a>
+                            @*<a href="@Url.Action("SorteosEmpresa", "Home", new {UserName= Model.UserName, idEmpresa = items.idEmpresa})" class="btn btn-primary pt-2 pb-2 d-block fw-bold">SORTEOS</a>*@
+                            @*@Html.DisplayFor(modelItem => item.Ganadores)*@
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <br />
+        <div class="text-center">
+            <a href="@Url.Action("DetalleEmpresa", "Home", new {@idEmpresa= items.idEmpresa})" class="btn btn-light p-4 underlineHover "> < Regresar </a>
+        </div>
+
+
+    </div>
+</div>
+
+<br /><br /><br /><br /><br /><br /><br />

@@ -1,0 +1,278 @@
+﻿@using PS_TUP.Models.GestionFiscalia
+@model DenunciaDesdeFiscalia
+
+@{
+    ViewBag.Title = "Detalles de Denuncia";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/BotonMensajes.css" />
+</head>
+
+<br /><br />
+
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-md-6">
+            <h2 class="text-uppercase">Detalle de Denuncia - @Model.IdTipoDenuncia </h2>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <label>ID DENUNCIA</label>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.IdDenuncia)
+                </dd>
+
+                <dt>
+                    <label>MOTIVO DENUNCIA</label>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.IdTipoDenuncia)
+                </dd>
+
+                <dt>
+                    <label>DENUNCIANTE</label>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.nombre)  @Html.DisplayFor(model => model.apellido)
+                </dd>
+
+                <dt>
+                    <label>DNI</label>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DNI)
+                </dd>
+
+
+                <dt>
+                    <label>FECHA DE NACIMIENTO</label>
+                </dt>
+                <dd>
+                    @Model.fecha_nac.ToString("dd/MM/yyyy")
+                </dd>
+
+
+                @{
+
+                    int edad = DateTime.Today.Year - Model.fecha_nac.Year;
+
+                    //si el mes es menor restamos un año directamente
+                    if (DateTime.Today.Month < Model.fecha_nac.Month)
+                    {
+                        <dt>
+                            <label>EDAD</label>
+                        </dt>
+                        <dd>
+                            @edad años
+                        </dd>
+                    }
+                    //sino preguntamos si estamos en el mismo mes, si es el mismo preguntamos si el dia de hoy es menor al de la fecha de nacimiento
+                    else if (DateTime.Today.Month == Model.fecha_nac.Month && DateTime.Today.Day < Model.fecha_nac.Day)
+                    {
+                        <dt>
+                            <label>EDAD</label>
+                        </dt>
+                        <dd>
+                            @edad años
+                        </dd>
+                    }
+
+                    else
+                    {
+                        <dt>
+                            <label>EDAD</label>
+                        </dt>
+                        <dd>
+                            @edad años
+                        </dd>
+                    }
+
+                }
+
+                <dt>
+                    <label>SEXO</label>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.sexo)
+                </dd>
+
+                <dt>
+                    <label>DESCRIPCIÓN</label>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descripcion)
+                </dd>
+
+                <dt>
+                    <label>FECHA DE DENUNCIA</label>
+                </dt>
+
+                <dd>
+                    @Model.Fecha.ToString("dd/MM/yyyy")
+                </dd>
+
+                <dt>
+                    <label>TELÉFONO DENUNCIANTE</label>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.telefono)
+                </dd>
+
+                <dt>
+                    <label>DIRECCIÓN</label>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.calle)  @Html.DisplayFor(model => model.altura) @Html.DisplayFor(model => model.piso),
+                    @Html.DisplayFor(model => model.ciudad),  @Html.DisplayFor(model => model.nombreProvincia)
+                </dd>
+
+                <dt>
+                    <label>EMAIL DENUNCIANTE</label>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    <label>ESTADO</label>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.activa)
+                </dd>
+
+                <dt>
+                    <label>ARCHIVOS ADJUNTOS</label>
+                </dt>
+
+                <dd>
+
+                    @{
+                        System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
+                        string foto1 = enc.GetString(Model.Foto1);
+                        string foto2 = enc.GetString(Model.Foto2);
+                        string archivo = enc.GetString(Model.Archivo);
+                        string audio1 = enc.GetString(Model.Audio1);
+                        string audio2 = enc.GetString(Model.Audio2);
+
+                        if (foto1 != "")
+                        {
+                            <p class="d-inline">- Imagen 1: &nbsp </p>
+                            <a href="@Url.Action("Download", "Denuncias", new { id = Model.IdDenuncia })" target="_blank" class="btn btn-link p-0">Ver</a>
+                            <a href="@Url.Action("Download", "Denuncias", new { id = Model.IdDenuncia })" download="Imagen1.jpg" class="btn btn-link p-0">Descargar</a>
+                            <br />
+                        }
+
+                        if (foto2 != "")
+                        {
+
+                            <p class="d-inline">- Imagen 2: &nbsp  </p>
+                            <a href="@Url.Action("Download2", "Denuncias", new {id = Model.IdDenuncia})" target="_blank" class="btn btn-link p-0">Ver</a>
+                            <a href="@Url.Action("Download2", "Denuncias", new {id = Model.IdDenuncia})" download="Imagen2.jpg" class="btn btn-link p-0">Descargar</a>
+                            <br />
+                        }
+
+
+                        if (audio1 != "")
+                        {
+
+                            <p class="d-inline">- Audio 1: &nbsp </p>
+                            <a href="@Url.Action("Download4", "Denuncias", new {id = Model.IdDenuncia})" download class="btn btn-link p-0">Descargar</a>
+                            <br />
+                        }
+
+                        if (audio2 != "")
+                        {
+
+                            <p class="d-inline">- Audio 2: &nbsp </p>
+                            <a href="@Url.Action("Download5", "Denuncias", new {id = Model.IdDenuncia})" download class="btn btn-link p-0">Descargar</a>
+                            <br />
+                        }
+
+                        if (archivo != "")
+                        {
+
+                            <p class="d-inline">- Documento: &nbsp </p>
+                            @*<a href="@Url.Action("Download3", "Denuncias", new {id = Model.IdDenuncia})" target="_blank" class="btn btn-link p-0">Ver</a> |*@
+                            <a href="@Url.Action("Download3", "Denuncias", new {id = Model.IdDenuncia})" download class="btn btn-link p-0">Descargar</a>
+                            <br />
+                        }
+
+
+
+                        else if (foto1 == "" & foto2 == "" & archivo == "" & audio1 == "" & audio2 == "")
+                        { <p>No hay archivos cargados.</p>}
+
+                    }
+                    <hr />
+                </dd>
+
+                <dt>
+                    <label>CAMBIAR ESTADO</label>
+                </dt>
+
+                <dd>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        CERRAR DENUNCIA
+                    </button>
+                </dd>
+
+            </dl>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       ¿Cerrar Denuncia?
+                    </div>
+                    <div class="modal-footer">                   
+                        <a href="@Url.Action("CerrarDenuncia", "Fiscalia", new {@id= Model.IdDenuncia})" class="btn btn-danger">CERRAR DENUNCIA</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-5 col-md-6 col-sm-6 ms-lg-5 @*align-items-center*@  " >
+            <div class="@*btn-group-vertical moverDiv*@ ">
+                <br />
+                @*<a href="#" class="btn btn-primary">Enviar Mensaje</a>*@
+                <div class="container-fluid moverDivTop">
+                    <div class="wrapper">
+                        <div id="formContent">
+                            <div class="pt-5">
+                                <a href="@Url.Action("CreateDesdeFiscalia", "Mensajes", new {@id= Model.IdDenuncia})" class="btn btn-primary ms-5 me-5 d-block fw-bold"> <p class="wrapper" style="margin-bottom:0px;">Mensajes</p></a>                      
+                                <a href="@Url.Action("DenunciasAbiertas", "Fiscalia")" class="btn btn-light pb-4">Volver</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                @*<div class="col-md-3 wrapper moverDivTop border border-3">
+                    <a href="@Url.Action("CreateDesdeFiscalia", "Mensajes", new {@id= Model.IdDenuncia})" class="btn btn-primary">Mensajes</a>
+                    <a href="@Url.Action("DenunciasAbiertas", "Fiscalia")" class="btn btn-light ">Volver</a>
+                </div>*@
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<br /><br /><br />

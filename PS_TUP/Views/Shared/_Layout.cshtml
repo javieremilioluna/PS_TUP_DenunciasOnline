@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - DenunciasOnline</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"rel="stylesheet" />
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-azul p-3 ">
+        <div class="container">
+            @Html.ActionLink("DenunciasOnline", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav ms-auto">
+
+
+                    @*@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link active" })
+        @Html.ActionLink("Denuncias", "InfoDenuncias", "Home", new { area = "" }, new { @class = "nav-link active" })
+        @Html.ActionLink("Empresas", "Index", "Home", new { area = "" }, new { @class = "nav-link active" })
+        @Html.ActionLink("Ayuda", "Index", "Home", new { area = "" }, new { @class = "nav-link active" })*@
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Usuario"))
+
+                        {
+                            @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Denuncias", "InfoDenuncias", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Empresas", "Empresas", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Ayuda", "Ayuda", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("HOLA! " + @User.Identity.Name.ToUpper(), "VerDatos", "Cuenta", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Cerrar Sesión", "Logout", "Cuenta", new { area = "" }, new { @class = "nav-link active" })
+
+                        }
+
+                        else if (User.IsInRole("Empresa"))
+
+                        {
+                            @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Empresas", "Empresas", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Ayuda", "Ayuda", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("HOLA! " + @User.Identity.Name.ToUpper(), "VerDatos", "Cuenta", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Cerrar Sesión", "Logout", "Cuenta", new { area = "" }, new { @class = "nav-link active" })
+
+                        }
+
+                        else if (User.IsInRole("Fiscalia"))
+                        {
+                            @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Empresas", "Empresas", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Ayuda", "Ayuda", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("HOLA! " + @User.Identity.Name.ToUpper(), "VerDatos", "Cuenta", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Cerrar Sesión", "Logout", "Cuenta", new { area = "" }, new { @class = "nav-link active" })
+
+                        }
+
+                        else if (User.IsInRole("Administrador"))
+                        {
+                            @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Empresas", "Empresas", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Ayuda", "Ayuda", "Home", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("HOLA! " + @User.Identity.Name.ToUpper(), "VerDatos", "Cuenta", new { area = "" }, new { @class = "nav-link active" })
+                            @Html.ActionLink("Cerrar Sesión", "Logout", "Cuenta", new { area = "" }, new { @class = "nav-link active" })
+
+                        }
+
+                    }
+
+                    else
+                    {
+
+                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link active " })
+                        @Html.ActionLink("Denuncias", "InfoDenuncias", "Home", new { area = "" }, new { @class = "nav-link active" })
+                        @Html.ActionLink("Empresas", "Empresas", "Home", new { area = "" }, new { @class = "nav-link active" })
+                        @Html.ActionLink("Ayuda", "Ayuda", "Home", new { area = "" }, new { @class = "nav-link active" })
+
+                        <li class="nav-item ">
+                            <img class="icono_acceso" src="~/Images/usuario.png" />
+                            @Html.ActionLink("ACCESO", "Login", "Cuenta", new { area = "" }, new { @class = "nav-link active" })
+
+                        </li>
+                    }
+
+                    @*<li class="nav-item dropdown">
+                        <img class="icono_acceso" src="~/Images/usuario.png" />
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            ACCESO
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @Html.ActionLink("USUARIOS", "AccesoUsuarios", "Acceso", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("EMPRESAS", "AccesoEmpresas", "Acceso", new { area = "" }, new { @class = "dropdown-item" })
+                        </ul>
+                    </li>*@
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <br />  <br />  <br /> 
+
+    <footer class="text-center text-lg-start text-muted">
+
+        <section class="d-flex justify-content-center justify-content-lg-between text-white" style="background-color: #263238;">
+
+            <div class="container text-center text-md-start mt-4">
+                <hr class=" border-white" /> 
+                <div class="row mt-4">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h4 class="fw-bold mb-4">
+                            <a href="@Url.Action("Index", "Home")" class="text-reset text-decoration-none">DenunciasOnline</a>
+                            @*<i class="fas fa-gem me-3"></i>*@ 
+                        </h4>
+                        <p>
+                            La plataforma que te brinda la información oficial de todas las empresas y desde donde podés realizar denuncias si fuiste
+                            víctima de un delito informático.
+                        </p>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Servicios
+                        </h6>
+                        <p>
+                            <a href="@Url.Action("Empresas", "Home")" class="text-reset text-decoration-none">Información Oficial de Empresas Registradas.</a>
+                        </p>
+                        <p>
+                            <a href="@Url.Action("InfoDenuncias", "Home")" class="text-reset text-decoration-none">Acceso al Formulario para Denunciar Ciberdelitos.</a>
+                        </p>
+                        @*<p>
+                            <a href="#!" class="text-reset">Vue</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Laravel</a>
+                        </p>*@
+                    </div>
+                    @*<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Settings</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Orders</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>*@
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Contacto
+                        </h6>
+                        <p><i class="fas fa-home me-3"></i> 25 de Mayo 800, Córdoba, Argentina</p>
+
+                        <p><i class="fas fa-phone me-3"></i> 0800 111 0000</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            <a href="@Url.Action("Contactenos","Home")" class="text-white text-decoration-underline">Contáctenos</a>
+                            @*info@denunciasonline.com*@
+                        </p>
+
+                        @*<p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>*@
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="text-center p-3 text-white" style="background-color: #1e282c;">
+            Todos los Derechos Reservados © 2021 | <a href="@Url.Action("TerminosYCondiciones","Home")" class="text-white text-decoration-underline">Términos y Condiciones</a> | <bold class="fw-bold">DenunciasOnline</bold>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap.js")
+
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/Site.js" asp-append-version="true"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

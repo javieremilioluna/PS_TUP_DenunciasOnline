@@ -1,0 +1,87 @@
+﻿@model PS_TUP.Denuncias
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<br /><br />
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6">
+            <h2 class="text-uppercase">Detalle de tu Denuncia por @Model.IdTipoDenuncia</h2>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <label>MOTIVO DENUNCIA</label>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IdTipoDenuncia)
+                </dd>
+
+                <dt>
+                    <label>DESCRIPCIÓN</label>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descripcion)
+                </dd>
+
+
+                @*<dt>
+                        @Html.DisplayNameFor(model => model.Fiscalia)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Fiscalia)
+                    </dd>*@
+
+                <dt>
+                    <label>FECHA</label>
+                </dt>
+
+                <dd>
+                    @Model.Fecha.ToString("dd/MM/yyyy")
+                </dd>
+
+                <dt>
+                    <label>ESTADO</label>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.activa)
+                </dd>
+
+            </dl>
+        </div>
+
+
+
+        <div class="col-md-5 d-flex align-items-center ">
+
+
+            @*<p class="">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.IdDenuncia }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>*@
+
+            <div class="btn-group-vertical moverDiv">
+                <br />
+                <a href="@Url.Action("Create", "Mensajes", new {@id= Model.IdDenuncia})" class="btn btn-primary">Mensajes</a>
+                @*<a href="@Url.Action("Create", "Mensajes")" class="btn btn-primary">Enviar Mensaje</a>*@
+                <a href="@Url.Action("Index")" class="btn btn-light ps-5">Volver</a>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<br /><br /><br /> <br /><br /><br />
+
+

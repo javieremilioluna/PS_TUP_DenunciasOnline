@@ -1,0 +1,74 @@
+﻿@model PS_TUP.Mensajes
+
+@{
+    ViewBag.Title = "Mensajes";
+    List<PS_TUP.Mensajes> mensajes = (List<PS_TUP.Mensajes>)ViewBag.items;
+    List<PS_TUP.Denuncias> denuncias = (List<PS_TUP.Denuncias>)ViewBag.denuncias;
+}
+<head>
+    <link rel="stylesheet" href="~/Content/Mensajes.css" />
+</head>
+
+<br /><br />
+<h4 class="text-center text-uppercase">Mensajes</h4>
+<br />
+
+<div class="container col-lg-9 col-md-12  border border-1 ultimoMensaje overflow-auto mensajes p-3" style="height: 350px">
+    <div class="row justify-content-center">
+        <div class="col-10 ">
+
+            @foreach (var item in mensajes)
+            {
+
+                if (item.Role == "Fiscalia")
+                {
+
+                    <div class="col-7 float-end ">
+                        <div class=" mensajeIndividual p-2 m-1 ">
+                            <h6 class="d-inline fw-bold">
+                                FISCALÍA:
+                            </h6>
+
+                            <p class="d-inline ">
+                                @Html.DisplayFor(modelItem => item.Mensaje) - (@Html.DisplayFor(modelItem => item.Fecha)) @*@item.Fecha.ToString("dd/MM/yyyy")*@
+                            </p>
+                            <br />
+                        </div>
+                    </div>
+                }
+
+
+                else if (item.Role == "Usuario")
+
+                {
+
+                    <div class="col-7 float-start">
+                        <div class=" mensajeIndividual p-2 m-1">
+                            <h6 class="d-inline fw-bold">
+                                DENUNCIANTE:
+                            </h6>
+
+                            <p class="d-inline">
+                                @Html.DisplayFor(modelItem => item.Mensaje) - (@Html.DisplayFor(modelItem => item.Fecha))
+                            </p>
+                            <br />
+                        </div>
+                    </div>
+                }
+
+            }
+        </div>
+    </div>
+</div>
+
+<br /><br />
+
+<div>
+    @{
+        var item2 = denuncias.FirstOrDefault();
+        <a href="@Url.Action("DetallesDenunciasCerradas", "Denuncias", new {@id = item2.IdDenuncia } )" class=" btn btn-light ">Volver</a>
+    }
+    @*@Html.ActionLink("Volver", "Index", "Denuncias")*@
+</div>
+
+<br /><br /><br />

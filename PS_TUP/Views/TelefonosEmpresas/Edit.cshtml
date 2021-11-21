@@ -1,0 +1,73 @@
+﻿@model PS_TUP.TelefonosEmpresas
+
+@{
+    ViewBag.Title = "Editar";
+    Layout = null;
+
+}
+<head>
+    <link rel="stylesheet" href="~/Content/VentanasModal.css" />
+</head>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <form id="myForm">
+        <div class="form-horizontal">
+            <h4>Editar Teléfono</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.IdRegTelefono)
+
+
+            @Html.HiddenFor(model => model.UserName2, new { htmlAttributes = new { @class = "" } })
+            @Html.ValidationMessageFor(model => model.UserName2, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                <label class="fw-bold">DESCRIPCIÓN</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "", @placeholder = "DESCRIPCIÓN", @maxlength = "190" } })
+                    <br />
+                    &nbsp @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="fw-bold">NÚMERO</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "", @placeholder = "NÚMERO", @onkeypress = "soloNumeros(event)", @maxlength = "30" } })
+                    <br />
+                    &nbsp @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Confirmar" onclick="validar()" class="btn btn-primary mt-3 ms-0" />
+                </div>
+            </div>
+            @*<p class="text-center">
+                    @Html.ActionLink("Volver", "Index", "TelefonosEmpresas")
+                </p>*@
+        </div>
+    </form>
+}
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<script>
+
+    var validar = function () {
+        debugger
+        var data = $("#myForm").serialize();
+
+        if (!$("#myForm").valid()) {
+
+            return false;
+        }
+
+    }
+
+</script>

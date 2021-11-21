@@ -1,0 +1,62 @@
+﻿@*<body>
+        <main>
+            <br /> <br /><br />
+            <section class="border p-4 h4 shadow row col-6">
+                <div class="alert alert-info text-center  " role="alert" data-mdb-color="success">
+                    <i class="fas fa-check-circle me-3"></i>¡Denuncia recibida!<br />
+                    <i></i>descargar
+                    <br />
+                </div><br />
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center  ">
+                    @Html.ActionLink("Descargar", "PrintReporteDenuncia", new { area = "" }, new { @type = "button", @class = "btn btn-success btn-lg px-4 gap-3 shadow-lg" })
+                    @Html.ActionLink("Volver", "VerDatos", "Cuenta", new { area = "" }, new { @type = "button", @class = "btn btn-light btn-lg px-4 gap-3 shadow-lg" })
+                </div>
+            </section>
+            <br /> <br /><br /> <br /><br /> <br /><br /><br /> <br /><br /><br />
+        </main>
+    </body>*@
+
+
+
+@{
+    ViewBag.Title = "Denuncia Enviada";
+}
+
+
+
+<head>
+    <link rel="stylesheet" href="~/Content/Registro.css" />
+</head>
+
+<div class="row">
+    <br /> <br /><br /><br /> 
+</div>
+
+
+<body class="bg-light">
+    <div class="container ">
+        <div class="wrapper">
+            <div id="formContentContraseña">
+                <br />
+                <div class="container col-6">
+                    <img class="img-fluid p-4" src="~/Images/okverde.png" />
+                </div>
+                <h3 class="h3 mb-3">Denuncia Enviada</h3>
+                <p>Le responderemos a la brevedad. ¡Muchas Gracias!</p>
+
+                <a href="@Url.Action("PrintReporteDenuncia", "Denuncias", new {@userName= User.Identity.Name})" class="btn btn-primary d-block p-3 m-3">Descargar Comprobante</a>
+                <a href="@Url.Action("VerDatos", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-light d-block p-3 m-3">Volver</a>
+
+                <br />
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+<br /> <br /> <br /><br /> <br /> 
+
+
+

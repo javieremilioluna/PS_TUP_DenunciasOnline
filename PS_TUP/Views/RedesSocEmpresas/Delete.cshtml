@@ -1,0 +1,51 @@
+﻿@model PS_TUP.RedesSocEmpresas
+
+@{
+    ViewBag.Title = "Borrar";
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/VentanasModal.css" />
+</head>
+
+<h3>¿Está seguro/a que desea borrar la Red Social?</h3>
+<div>
+  
+    <hr />
+    <dl class="dl-horizontal">
+     
+        <dt>
+            <label class="fw-bold">RED</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Red)
+        </dd>
+
+        <dt>
+            <label class="fw-bold">LINK</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Link)
+        </dd>
+
+        <dt>
+            <label class="fw-bold">DESCRIPCIÓN</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-primary mt-3 ms-0" /> 
+        </div>
+    }
+</div>

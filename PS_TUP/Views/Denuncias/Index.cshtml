@@ -1,0 +1,84 @@
+﻿@model IEnumerable<PS_TUP.Denuncias>
+
+@{
+    ViewBag.Title = "Mis Denuncias";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+}
+
+
+<br /><br />
+<h2 class="text-center">MIS DENUNCIAS</h2>
+<br /><br />
+
+<div class="row justify-content-center">
+    <div class="col-md-12 col-sm-12">
+        <table class="table table-striped table-hover">
+            <tbody>
+                <tr>
+
+                    <th class="align-middle ps-4 ">
+                        <label>CÓDIGO DE DENUNCIA</label>
+                    </th>
+
+                    <th class="align-middle">
+                        <label>MOTIVO DENUNCIA</label>
+                    </th>
+                    @*<th class="align-middle">
+                        <label>DESCRIPCIÓN</label>
+                    </th>*@
+                    <th class="align-middle text-center">
+                        <label>FECHA</label>
+                    </th>
+
+                    <th class="align-middle text-center">
+                        <label>ESTADO</label>
+                    </th>
+
+                    <th class="align-middle text-center"></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                <tr>
+
+                    <td class="align-middle ps-4 ">
+                       000-@Html.DisplayFor(modelItem => item.IdDenuncia)
+                    </td>
+
+                    <td class="align-middle ">
+                        @Html.DisplayFor(modelItem => item.IdTipoDenuncia)
+                    </td>
+
+                    @*<td class="align-middle p-4 text-start">
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>*@
+
+                    <td class="align-middle text-center">
+                        @item.Fecha.ToString("dd/MM/yyyy")
+                    </td>
+
+                    <td class="align-middle text-center ">
+                        @Html.DisplayFor(modelItem => item.activa)
+                    </td>
+                    <td class="align-middle text-center ">
+                        <a href=" @Url.Action("Details", "Denuncias", new { id = item.IdDenuncia })" class=" btn btn-lg text-dark edit-button "><i class="far fa-eye"></i></a>
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <a href=" @Url.Action("DenunciasCerradasVistaUsuario", "Denuncias", new { @userName= User.Identity.Name })" class=" btn btn-primary">TUS DENUNCIAS CERRADAS</a>
+        </div>
+        <p class="text-center text-decoration-none">
+          @Html.ActionLink("< Inicio", "VerDatos", "Cuenta")
+        </p>
+
+    </div>
+</div>
+
+<br /><br /><br /><br /><br /><br />
+
+

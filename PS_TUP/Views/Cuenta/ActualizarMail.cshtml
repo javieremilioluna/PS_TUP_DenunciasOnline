@@ -1,0 +1,61 @@
+﻿@*@model PS_TUP.Models.Usuario*@
+@using PS_TUP.Models.Acceso
+@model Email
+
+@{
+    ViewBag.Title = "Cambiar Email";
+}
+
+<div class="row">
+    <br /> <br />
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UserName)
+
+    <head>
+        <link rel="stylesheet" href="~/Content/Registro.css" />
+    </head>
+
+    <body class="bg-light">
+        <div class="container ">
+            <div class="wrapper">
+                <div id="formContentContraseña">
+                    <br />
+                    <div class="container col-6">
+                        <img class="img-fluid p-2" src="~/Images/mail.jpg" />
+                    </div>
+                    <h3 class="h3 mb-3">Cambiar Email</h3>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+
+                    <form>
+
+                        <label>Mail actual: </label>
+                        @ViewBag.mail @ViewBag.mail2
+                        <br /> <br />
+
+                        @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "dropDown", @id = "Email", @placeholder = "Nuevo Email", @name = "Email", @maxlength = "25" } })
+                        @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
+
+                        <br />
+                        <div class=" pb-0 wrapper">
+                            <input type="submit" class="" value="CONFIRMAR">
+                        </div>
+
+                    </form>
+                    <a href="@Url.Action("VerDatos", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-light">Cancelar</a>
+                    <br /><br />
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+
+    <br /> <br /> <br />
+
+
+}

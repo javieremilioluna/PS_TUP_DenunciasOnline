@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Mensaje Enviado";
+}
+
+
+<body>
+    <main>
+        <br /> <br /><br />
+        <section class="border p-4 h4 shadow">
+            <div class="alert alert-success text-center" role="alert" data-mdb-color="success">
+                <i class="fas fa-check-circle me-3"></i>¡Su mensaje ha sido enviado correctamente!<br />
+                <i></i>Le responderemos a la brevededad. Muchas gracias.
+                <br />
+            </div><br />
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center  ">
+                @Html.ActionLink("Ir a Inicio", "Index", "Home", new { area = "" }, new { @type = "button", @class = "btn btn-success btn-lg px-4 gap-3 shadow-lg" })
+            </div>
+        </section>
+        <br /> <br /><br /> <br /><br /> <br /><br /><br /> <br /><br /><br />
+    </main>
+</body>

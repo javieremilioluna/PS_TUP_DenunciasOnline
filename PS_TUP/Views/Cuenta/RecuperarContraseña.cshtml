@@ -1,0 +1,95 @@
+﻿@*@model PS_TUP.Usuarios*@
+
+@model PS_TUP.Models.Usuario
+
+@*<body class="subpage">
+        <h2>Recuperar Contraseña</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Enviar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </body>*@
+
+
+@{
+    ViewBag.Title = "Olvidaste tu contraseña";
+}
+
+<div class="row">
+    <br /> <br />
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UserName)
+
+    <head>
+        <link rel="stylesheet" href="~/Content/Registro.css" />
+    </head>
+
+    <body class="bg-light">
+        <div class="container ">
+            <div class="wrapper">
+                <div id="formContentContraseña">
+                    <br />
+                    <div class="container col-6">
+                        <img class="img-fluid " src="~/Images/olvido.jpg" />
+                    </div>
+                    <br />
+                    <h3 class="h3 mb-3">Recuperar Contraseña</h3>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+
+                    <form>
+
+                        <label class="fw-bold form-label">INGRESE SU E-MAIL DE REGISTRO</label>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "dropDown", @placeholder = "E-MAIL", @minlength = "5" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                        @*@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "", @id = "Password", @placeholder = "Nueva Contraseña", @name = "Password", @maxlength = "15" } })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })*@
+
+                        <p>Le enviaremos un correo electrónico a la dirección que proporcionó.</p>
+
+                        <br />
+                        <div class=" pb-0 wrapper">
+                            <input type="submit" class="" value="CONFIRMAR">
+                        </div>
+                       
+                    </form>
+                    <a href="@Url.Action("Login", "Cuenta", new { })" class="btn btn-light">Cancelar</a>
+                    <br /><br />
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+
+    <br /> <br /> <br /><br />
+
+
+}

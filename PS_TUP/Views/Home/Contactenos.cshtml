@@ -1,0 +1,67 @@
+﻿
+@using PS_TUP.Models.DTO
+@model MensajeContacto
+
+@{
+    ViewBag.Title = "Contáctenos";
+}
+
+<div class="row">
+    <br /> <br />
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <head>
+        <link rel="stylesheet" href="~/Content/Contactanos.css" />
+    </head>
+
+    <body class="bg-light">
+        <div class="container ">
+            <div class="wrapper">
+                <div id="formContentContraseña">
+                    <br />
+                    <div class="container col-6 mb-0">
+                        <img class="img-fluid p-4" src="~/Images/mail3.jpg" />
+                    </div>
+                    <h3 class="h3 mb-0 mt-0">CONTÁCTENOS</h3>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+
+                    <form>
+
+                        <br /> <br />
+
+                        @Html.EditorFor(model => model.nombreApellido, new { htmlAttributes = new { @class = "dropDown", @id = "", @placeholder = "Nombre y Apellido", @name = "", @maxlength = "45", @onkeypress = "soloLetras(event)" } })
+                        @Html.ValidationMessageFor(model => model.nombreApellido, "", new { @class = "text-danger" })
+
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "dropDown", @id = "", @placeholder = "Email", @name = "", @maxlength = "35" } })
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+
+                        @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "dropDown", @id = "", @onkeypress = "soloNumeros(event)", @placeholder = "Teléfono", Type = "tel", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+
+                        @Html.TextAreaFor(model => model.mensaje, 10, 20, new { @class = "dropDown", style = "max-width:100% !important;", @maxlength = "1990", @placeholder = "Mensaje" })
+                        @Html.ValidationMessageFor(model => model.mensaje, "", new { @class = "text-danger" })
+
+                        <br />
+                        <div class=" pb-0 wrapper">
+                            <input type="submit" class="" value="ENVIAR">
+                        </div>
+
+                    </form>
+               
+                    <br /><br />
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+
+    <br /> <br /> <br />
+
+
+}

@@ -1,0 +1,100 @@
+﻿
+
+@using PS_TUP.Models.TipoEmpresa
+@model RegistroTipoEmpresa
+
+
+@{
+    ViewBag.Title = "Agregar o actualizar comprobante";
+}
+
+
+<div class="row">
+    <br /> <br />
+</div>
+
+@using (Html.BeginForm("CambiarComprobante", "Cuenta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UserName)
+
+    <head>
+        <link rel="stylesheet" href="~/Content/Registro.css" />
+    </head>
+
+
+    <body class="bg-light">
+        <div class="container ">
+            <div class="wrapper">
+                <div id="formContent">
+                    <br />
+
+                    <h3 class="h3 mb-3 mt-3">Requisitos para verificar tu empresa:</h3>
+
+                    <p class="text-start ps-5 pe-5">
+                        Enviar por correo postal a - 25 de mayo 800, piso 8, Ciudad de Córdoba – <br /> la siguiente documentación impresa:
+                        <br />
+                        1)	Acta de constitución de la empresa.<br />
+                        2)	Nota de solicitud de verificación firmada por su Presidente, Gerente General o Representante legal.<br />
+                        3)	Habilitación comercial.<br />
+                        4)	DDJJ de domicilio.<br />
+
+                    </p>
+
+
+                        @*<h3 class="h3 mb-3 mt-3">Actualizar Comprobante de Inscripción</h3>
+                        <p>(AFIP)</p>
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+
+                        <form>
+
+                            <img class="img-fluid p-4" src="@Url.Action("getComprobante", "Cuenta", new {UserName= Model.UserName})" />
+                            <input class="form-label img-fluid p-2" type="file" accept=".jpg,.png" name="imageLoad" />
+                            <p>Sólo se admite una imagen en formato .png o .jpg</p>
+
+                            <br />
+                            <div class=" pb-0 wrapper">
+                                <input type="submit" class="" value="CONFIRMAR">
+                            </div>
+
+                        </form>*@
+                    @*<a href="@Url.Action("VerDatos", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-light">Cancelar</a>*@
+
+                    <a href="@Url.Action("VerDatos", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-light">Volver</a>
+                    <br /><br />
+                </div>
+            </div>
+        </div>
+
+        <br /> <br /><br /><br /><br /><br />
+
+    </body>
+
+
+    @*<div class="row">
+        <div class="col-lg-6">
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">logo</label>
+                    <div class="col-sm-6">
+                        <img src="@Url.Action("getComprobante", "Cuenta", new {UserName= Model.UserName})" />
+                        <input type="file" accept=".jpg,.png" name="imageLoad" />
+                    </div>
+                </div>
+
+                <div class="form-group text-right">
+                    <div class="col-xs-12">
+                        <button class="btn btn-success" type="submit">
+                            Actualizar Logo
+                        </button>
+                    </div>
+                </div>
+                <br />
+                <a href="@Url.Action("VerDatos", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-success">Cancelar</a>
+            </div>
+        </div>
+
+    </div>*@
+}

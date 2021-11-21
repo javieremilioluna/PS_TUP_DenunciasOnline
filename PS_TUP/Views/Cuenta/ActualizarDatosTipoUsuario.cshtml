@@ -1,0 +1,98 @@
+﻿
+
+@using PS_TUP.Models.TiposUsuario
+@model RegistroTipoUsuario
+
+
+@{
+    ViewBag.Title = "Actualizar Datos";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+}
+
+
+<div class="row">
+    <br /> <br />
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UserName)
+
+    <head>
+        <link rel="stylesheet" href="~/Content/Registro.css" />
+    </head>
+
+    <body class="bg-light">
+        <div class="container ">
+            <div class="wrapper">
+                <div id="formContent">
+                    <br />
+
+                    <h3 class="h3 mb-3">Actualizar Datos</h3>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger2" })
+
+                    <form>
+                        <label class="col-sm-6 fw-bold">DNI</label>
+                        @Html.EditorFor(model => model.DNI, new { htmlAttributes = new { @class = "dropDown", @id = "DNI", @onkeypress = "soloNumeros(event)", @placeholder = "DNI", @name = "DNI", @Type = "tel", @maxlength = "10" } })
+                        @Html.ValidationMessageFor(model => model.DNI, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Nombre</label>
+                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "", @id = "", @onkeypress = "soloLetras(event)", @placeholder = "Nombre", @name = "Nombre", @maxlength = "45" } })
+                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Apellido</label>
+                        @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { @class = "", @id = "", @onkeypress = "soloLetras(event)", @placeholder = "Apellido", @name = "Apellido", @maxlength = "45" } })
+                        @Html.ValidationMessageFor(model => model.apellido, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Fecha de Nacimiento</label>
+                        @Html.EditorFor(model => model.fecha_nac, new { htmlAttributes = new { @class = "dropDown", @max = "2003-01-01" } })
+                        @Html.ValidationMessageFor(model => model.fecha_nac, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Sexo</label>
+                        @Html.DropDownListFor(model => model.sexo, new SelectList(Enum.GetValues(typeof(Sexo))), "Sexo", new { @class = "dropDown " })
+                        @Html.ValidationMessageFor(model => model.sexo, null, new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Teléfono</label>
+                        @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "dropDown", @id = "Telefono", @onkeypress = "soloNumeros(event)", @placeholder = "Teléfono", @name = "Telefono", Type = "tel", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Provincia</label>
+                        @Html.DropDownList("idProvincia", items, "Seleccione Provincia", htmlAttributes: new { @class = "dropDown" })
+                        @Html.ValidationMessageFor(model => model.idProvincia, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Ciudad</label>
+                        @Html.EditorFor(model => model.ciudad, new { htmlAttributes = new { @class = "", @id = "Ciudad", @placeholder = "Ciudad", @name = "Ciudad", @maxlength = "45" } })
+                        @Html.ValidationMessageFor(model => model.ciudad, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Calle</label>
+                        @Html.EditorFor(model => model.calle, new { htmlAttributes = new { @class = "", @id = "Calle", @placeholder = "Calle", @name = "Calle", @maxlength = "45" } })
+                        @Html.ValidationMessageFor(model => model.calle, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Altura</label>
+                        @Html.EditorFor(model => model.altura, new { htmlAttributes = new { @class = "", @id = "Altura", @placeholder = "Altura", @name = "Altura", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.altura, "", new { @class = "text-danger" })
+
+                        <label class="col-sm-6 fw-bold">Piso</label>
+                        @Html.EditorFor(model => model.piso, new { htmlAttributes = new { @class = "", @id = "Piso", @placeholder = "Piso", @name = "Piso", @maxlength = "10" } })
+                        @Html.ValidationMessageFor(model => model.piso, "", new { @class = "text-danger" })
+
+
+                        <br />
+
+                        <div class=" pb-0 wrapper">
+                            <input type="submit" class="" value="CONFIRMAR">
+                        </div>
+                    </form>
+                    <a href="@Url.Action("VerDatos", "Cuenta", new { @userName = User.Identity.Name })" class="btn btn-light pb-5">Cancelar</a>
+                    <br />
+                </div>
+            </div>
+        </div>
+
+        <br /> <br /><br /><br /><br /><br />
+
+    </body>
+    
+}

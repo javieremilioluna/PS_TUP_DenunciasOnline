@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Verificar Empresa";
+}
+
+
+<div class="row">
+    <br /> <br />
+</div>
+
+
+    <head>
+        <link rel="stylesheet" href="~/Content/Registro.css" />
+    </head>
+
+
+    <body class="bg-light">
+        <div class="container ">
+            <div class="wrapper">
+                <div id="formContent">
+                    <br />
+
+                    <h3 class="h3 mb-3 mt-3">Requisitos para verificar tu empresa:</h3>
+
+                    <p class="text-start ps-5 pe-5">
+                        Enviar por correo postal a - <b>25 de mayo 800, piso 8, Ciudad de Córdoba</b>  – la siguiente documentación impresa:
+                        <br /><br />
+                         <b>1)</b>	Nota de solicitud de verificación firmada por su Presidente, Gerente General o Representante legal.<br />
+                         <b>2)</b> 	Habilitación o licencia comercial otorgada por la jurisdicción en donde se encuentra registrada la empresa.<br />
+                         <b>3)</b>	DDJJ de domicilio.<br /><br />
+
+                        La confirmación de la verificación será notificada a la dirección de correo electrónico que proporcionó al momento del registro.
+
+                    </p>
+                    <br />
+                    <a href="@Url.Action("VerDatos", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-light"> < Volver</a>
+                    <br /><br /><br /> <br />
+                </div>
+            </div>
+        </div>
+
+        <br /> <br /><br />
+
+    </body>
+
+
+ 

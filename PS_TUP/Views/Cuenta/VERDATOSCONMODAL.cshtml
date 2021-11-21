@@ -1,0 +1,86 @@
+﻿@{
+
+    ViewBag.Title = "VerDatos";
+}
+
+<h2>Hola @User.Identity.Name.ToUpper()!</h2>
+
+@if (User.Identity.IsAuthenticated)
+
+{
+    //string nombreUser = @User.Identity.Name.ToString();
+    // string userId = User.Identity.GetUserId()
+    @*<h2>
+            @Html.Label(nombreUser)
+        </h2>*@
+
+    if (User.IsInRole("Empresa"))
+    {
+        <a href="@Url.Action("CambiarContraseña", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-success">Cambiar Contraseña</a>
+        <a href="@Url.Action("ActualizarDatosTipoEmpresa", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-success">Actualizar Datos Empresa</a>
+        <a href="@Url.Action("CambiarLogo", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-light">Ver o modificar logo</a>
+        <a href="@Url.Action("CambiarComprobante", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-info">Ver o modificar comprobante</a>
+
+
+        <button type="button" class="btn btn-primary" onclick="llamarVistaParcial()" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Launch modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="resultado">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+    else if (User.IsInRole("Usuario"))
+    {
+        <a href="@Url.Action("CambiarContraseña", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-success">Cambiar Contraseña</a>
+        <a href="@Url.Action("ActualizarDatosTipoUsuario", "Cuenta", new {@userName= User.Identity.Name})" class="btn btn-success">Actualizar Datos</a>
+    }
+
+
+    @section Scripts{
+
+        <script type="text/javascript">
+             function llamarVistaParcial() {
+            var laURLDeLaVista = '@Url.Action("RegistroExitoso", "Cuenta")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: {},
+                success: function (response) {
+                    $('#resultado').html(response);
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                }
+            });
+
+            $('#myModal').modal('show');  
+        }
+
+
+        </script>
+
+    }
+
+
+}

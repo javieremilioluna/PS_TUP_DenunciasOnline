@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PS_TUPModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Denuncias">
+          <Key>
+            <PropertyRef Name="IdDenuncia" />
+          </Key>
+          <Property Name="IdDenuncia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoDenuncia" Type="nvarchar(max)" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="Foto1" Type="image" />
+          <Property Name="Foto2" Type="image" />
+          <Property Name="Archivo" Type="varbinary(max)" />
+          <Property Name="Fiscalia" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="activa" Type="varchar" MaxLength="10" />
+          <Property Name="Audio1" Type="varbinary(max)" />
+          <Property Name="Audio2" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tipoUsuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DNI" Type="nvarchar" MaxLength="50" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="70" />
+          <Property Name="apellido" Type="nvarchar" MaxLength="50" />
+          <Property Name="fecha_nac" Type="date" />
+          <Property Name="sexo" Type="varchar" MaxLength="10" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="idProvincia" Type="int" />
+          <Property Name="ciudad" Type="nvarchar" MaxLength="50" />
+          <Property Name="calle" Type="nvarchar" MaxLength="50" />
+          <Property Name="altura" Type="nvarchar" MaxLength="50" />
+          <Property Name="piso" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityContainer Name="PS_TUPModel2StoreContainer">
+          <EntitySet Name="Denuncias" EntityType="Self.Denuncias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipoUsuario" EntityType="Self.tipoUsuario" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PS_TUPModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PS_TUPEntitiesGestionUsuarios" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Denuncias" EntityType="PS_TUPModel2.Denuncias" />
+          <EntitySet Name="tipoUsuario" EntityType="PS_TUPModel2.tipoUsuario" />
+        </EntityContainer>
+        <EntityType Name="Denuncias">
+          <Key>
+            <PropertyRef Name="IdDenuncia" />
+          </Key>
+          <Property Name="IdDenuncia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoDenuncia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Foto1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Foto2" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Archivo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Fiscalia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="activa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Audio1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Audio2" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tipoUsuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DNI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fecha_nac" Type="DateTime" Precision="0" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idProvincia" Type="Int32" />
+          <Property Name="ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="altura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="piso" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sexo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PS_TUPModel2StoreContainer" CdmEntityContainer="PS_TUPEntitiesGestionUsuarios">
+          <EntitySetMapping Name="Denuncias">
+            <EntityTypeMapping TypeName="PS_TUPModel2.Denuncias">
+              <MappingFragment StoreEntitySet="Denuncias">
+                <ScalarProperty Name="Audio2" ColumnName="Audio2" />
+                <ScalarProperty Name="Audio1" ColumnName="Audio1" />
+                <ScalarProperty Name="activa" ColumnName="activa" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Fiscalia" ColumnName="Fiscalia" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="Foto2" ColumnName="Foto2" />
+                <ScalarProperty Name="Foto1" ColumnName="Foto1" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdTipoDenuncia" ColumnName="IdTipoDenuncia" />
+                <ScalarProperty Name="IdDenuncia" ColumnName="IdDenuncia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipoUsuario">
+            <EntityTypeMapping TypeName="PS_TUPModel2.tipoUsuario">
+              <MappingFragment StoreEntitySet="tipoUsuario">
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="piso" ColumnName="piso" />
+                <ScalarProperty Name="altura" ColumnName="altura" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fecha_nac" ColumnName="fecha_nac" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
